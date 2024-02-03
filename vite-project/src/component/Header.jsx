@@ -1,7 +1,8 @@
 import React from 'react'
-import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt } from 'react-icons/hi'
+import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt, HiOutlineUser } from 'react-icons/hi'
+import { MdOutlineSettings } from "react-icons/md";
+import { PiSignOutBold } from "react-icons/pi";
 import { Menu, Popover, Transition } from '@headlessui/react'
-import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { Fragment } from 'react'
 
@@ -108,7 +109,7 @@ const Header = () => {
                                                 active && 'bg-gray-100',
                                                 'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
-                                        >
+                                        ><HiOutlineUser className="inline-block mr-8" />
                                             Your Profile
                                         </div>
                                     )}
@@ -121,7 +122,7 @@ const Header = () => {
                                                 active && 'bg-gray-100',
                                                 'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
-                                        >
+                                        ><MdOutlineSettings className="inline-block mr-14" />
                                             Settings
                                         </div>
                                     )}
@@ -133,7 +134,7 @@ const Header = () => {
                                                 active && 'bg-gray-100',
                                                 'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
-                                        >
+                                        ><PiSignOutBold className="inline-block mr-12" />
                                             Sign out
                                         </div>
                                     )}
