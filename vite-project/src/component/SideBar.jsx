@@ -1,22 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Link, useLocation } from 'react-router-dom'
 import { FcAbout, FcBullish, FcList } from 'react-icons/fc'
 import { HiOutlineLogout } from 'react-icons/hi'
 import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_LINKS } from '../lib/constants'
 import logo from '../assets/SiMagang.png'
+import Logout from '../pages/Logout'
 
 const linkClass =
-	'flex items-center gap-2 font-light px-3 py-2 hover:bg-neutral-700 hover:no-underline active:bg-neutral-600 rounded-sm text-base'
+	'flex items-center gap-2 font-light px-3 py-2 hover:bg-[#FF9843] hover:no-underline hover:text-white active:text-white active:bg-[#FF9843] rounded-full text-base'
 
 export default function Sidebar() {
+    const [showModal, setShowModal] = useState(false);
 	return (
-		<div className="bg-neutral-900 w-60 p-3 flex flex-col">
-			<div className="flex items-center gap-2 px-1 py-3">
-            <img src={logo} alt="Your Icon" style={{ width: '60px', height: '60px' }} />
-				<span className="text-neutral-200 text-lg font-bold">SiMagang</span>
+		<div className="bg-white  p-3 flex flex-col">
+			<div className="flex items-center gap-2 px-1">
+            <img src={logo} alt="Your Icon" style={{ width: '50px', height: '50px' }} />
+				<span className="text-gray-600 text-lg font-bold">SiMagang</span>
 			</div>
-			<div className="py-8 flex flex-1 flex-col gap-0.5">
+			<div className="pt-7 pb-8 flex flex-1 flex-col gap-1">
 				{DASHBOARD_SIDEBAR_LINKS.map((link) => (
 					<SidebarLink key={link.key} link={link} />
 				))}
@@ -25,12 +27,16 @@ export default function Sidebar() {
 				{DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((link) => (
 					<SidebarLink key={link.key} link={link} />
 				))}
-				<div className={classNames(linkClass, 'cursor-pointer text-red-500')}>
-					<span className="text-xl">
+				<button className={classNames(linkClass, 'cursor-pointer text-red-500')}
+					onClick={() => {
+						setShowModal(true);
+					}}>
+					<span className="text-xl" >
 						<HiOutlineLogout />
 					</span>
-					Logout
-				</div>
+					Log Out	
+				</button>
+				{showModal && <Logout setOpen={setShowModal} />}
 			</div>
 		</div>
 	)
@@ -42,7 +48,7 @@ function SidebarLink({ link }) {
 	return (
 		<Link
 			to={link.path}
-			className={classNames(pathname === link.path ? 'bg-neutral-700 text-white' : 'text-neutral-400', linkClass)}
+			className={classNames(pathname === link.path ? 'bg-[#FF9843] text-white' : 'text-neutral-400', linkClass)}
 		>
 			<span className="text-xl">{link.icon}</span>
 			{link.label}

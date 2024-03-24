@@ -27,9 +27,9 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <HiClipboardCheck />
 	},
 	{
-		key: 'presence',
-		label: 'Presence',
-		path: '/presence',
+		key: 'attendance',
+		label: 'Attendance',
+		path: '/attendance',
 		icon: <HiOutlineUsers />
 	}
 ]

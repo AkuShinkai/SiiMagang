@@ -1,24 +1,23 @@
-import React from 'react'
-import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt, HiOutlineUser } from 'react-icons/hi'
+import React, { useState } from 'react'
+import { HiOutlineBell, HiOutlineChatAlt, HiOutlineUser, HiMenu} from 'react-icons/hi'
 import { MdOutlineSettings } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
 import { Menu, Popover, Transition } from '@headlessui/react'
 import classNames from 'classnames'
 import { Fragment } from 'react'
+import Searchbar from './Searchbar';
+import Logout from '../pages/Logout'
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
+    const [showModal, setShowModal] = useState(false);
     return (
-        <div className=' w-full '>
+        <div className='w-full'>
             <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between">
-                <div className="relative">
-                    <HiOutlineSearch fontSize={20} className="text-gray-400 absolute top-1/2 left-3 -translate-y-1/2" />
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="text-sm focus:outline-none active:outline-none border border-gray-300 w-[24rem] h-10 pl-11 pr-4 rounded-sm"
-                    />
-                </div>
-                <div className="flex items-center gap-2 mr-2">
+                <button className='flex sm:hidden' >
+                    <HiMenu className='text-gray-400 me-4 cursor-pointer'/>
+                </button>
+                <Searchbar/>
+                <div className="flex items-center gap-2 mr-2 md:mr-0">
                     <Popover className="relative">
                         {({ open }) => (
                             <>
@@ -28,7 +27,7 @@ const Header = () => {
                                         'group inline-flex items-center rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100'
                                     )}
                                 >
-                                    <HiOutlineChatAlt fontSize={24} />
+                                    <HiOutlineChatAlt fontSize={24} className='text-gray-400' />
                                 </Popover.Button>
                                 <Transition
                                     as={Fragment}
@@ -58,7 +57,7 @@ const Header = () => {
                                         'group inline-flex items-center rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100'
                                     )}
                                 >
-                                    <HiOutlineBell fontSize={24} />
+                                    <HiOutlineBell fontSize={24} className='text-gray-400' />
                                 </Popover.Button>
                                 <Transition
                                     as={Fragment}
@@ -81,10 +80,10 @@ const Header = () => {
                     </Popover>
                     <Menu as="div" className="relative">
                         <div>
-                            <Menu.Button className="ml-2 bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                            <Menu.Button className="ml-2 bg-transparent flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
                                 <span className="sr-only">Open user menu</span>
                                 <div
-                                    className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
+                                    className="h-10 w-10 rounded-full bg-transparent bg-cover bg-no-repeat bg-center"
                                     style={{ backgroundImage: 'url("https://pmb.pnm.ac.id/assets/img/logo/pnm.png")' }}
                                 >
                                     <span className="sr-only">Marc Backes</span>
@@ -130,12 +129,16 @@ const Header = () => {
                                 <Menu.Item>
                                     {({ active }) => (
                                         <div
+                                            onClick={() => {
+                                                setShowModal(true);
+                                            }}
                                             className={classNames(
                                                 active && 'bg-gray-100',
                                                 'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
                                         ><PiSignOutBold className="inline-block mr-12" />
                                             Sign out
+                                            {showModal && <Logout setOpen={setShowModal} />}
                                         </div>
                                     )}
                                 </Menu.Item>
