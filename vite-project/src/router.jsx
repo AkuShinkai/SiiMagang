@@ -4,10 +4,12 @@ import {
     createBrowserRouter,
 } from "react-router-dom";
 import Home from './pages/Home.jsx';
-import Project from './pages/Project.jsx';
-import Presence from './pages/Presence.jsx';
 import NotFound from './pages/NotFound.jsx';
 import App from './App.jsx';
+import Login from './pages/Login.jsx'
+import Register from './pages/Register.jsx'
+import Logbook from './pages/Logbook.jsx'
+import AddLogbook from './pages/AddLogbook.jsx'
 
 
 const router = createBrowserRouter([
@@ -17,7 +19,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />
+                element: <Dashboard />
+            },
+            {
+                path: "/LogBooks",
+                element: <Logbook />
+            },
+            {
+                path: "/AddLogbook",
+                element: <AddLogbook />
             },
              {
                  path: "/project",
@@ -42,6 +52,16 @@ const router = createBrowserRouter([
             }
         ]
     },
+
+    // buat navigate button di login atau register
+    // {
+    //     path: "/login",
+    //     element: <Login />,
+    // },
+    // {
+    //     path: "/register",
+    //     element: <Register />,
+    // },
 ]);
 
 export default router;
