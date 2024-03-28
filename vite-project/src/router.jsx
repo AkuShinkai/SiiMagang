@@ -3,7 +3,7 @@ import './index.css'
 import {
     createBrowserRouter,
 } from "react-router-dom";
-import Dashboard from './pages/Dashboard.jsx';
+import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
 import App from './App.jsx';
 import Login from './pages/Login.jsx'
@@ -29,23 +29,23 @@ const router = createBrowserRouter([
                 path: "/AddLogbook",
                 element: <AddLogbook />
             },
-            // {
-            //     path: "/blogs",
-            //     element: <Blogs />
-            // },
-            // {
-            //     path: "/contact",
-            //     element: <Contact />
-            // },
+             {
+                 path: "/project",
+                 element: <Project />
+             },
+             {
+                 path: "/presence",
+                 element: <Presence />
+             },
             // {
             //     path: "/about",
             //     element: <About />
             // },
-            // {
-            //     path: "/blogs/:id",
-            //     element: <BlogView />,
-            //     loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
-            // }
+            //{
+              //   path: "/blogs/:id",
+                // element: <BlogView />,
+                //loader: ({ params }) => fetch(`http://localhost:5173/SiiMagang/${params.id}`)
+             //},
             {
                 path: "*",
                 element: <NotFound />
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
     // {
     //     path: "/register",
     //     element: <Register />,
-    // }, 
+    // },
 ]);
 
 export default router;
