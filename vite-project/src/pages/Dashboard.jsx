@@ -13,7 +13,7 @@ const Dashboard = () => {
           <div className="p-5">
             <a className="block mt-1 text-lg text-left font-thin text-gray-400 hover:underline">Halo,</a>
             <div className='block text-2xl text-left font-bold'>Alieffiea</div>
-            <p className="mt-2 text-left font-extralight text-black">
+            <p className="mt-2 font-extralight text-black text-justify">
             Welcome to the web-based internship activity monitoring application. A system that facilitates each intern at PT OTAK KANAN to take attendance, record daily activities through the website. Start your internship experience easily and may success accompany every step of the way!
             </p>
           </div>

@@ -4,18 +4,18 @@ import { useNavigate } from 'react-router-dom';
 
 function Logbook()  {
   const navigate = useNavigate();
-  const TABLE_HEAD = ["No.", "Day", "Date", "Activity", "action" ];
+  const TABLE_HEAD = ["No.", "Date", "Activity", "action" ];
   const TABLE_COLUMN_WIDTHS = ["50px", "100px", "100px", "100px", "100px"];
   return (
     
-    <div className=' w-full flex flex-col shadow-lg mb-6 mt-4 bg-gray-600'>
-      <div className="flex flex-row justify-end mt-3 mr-4">
+    <div className='max-sm m-5 rounded-xl flex flex-col shadow-md mb-6 mt-4 bg-white'>
+      <div className="flex justify-end my-5 mx-5">
           <button
            onClick={handleClick}
-            className="bg-blue-500 text-white px-10 py-1 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+            className="flex bg-blue-400 text-md px-3 py-1 rounded justify-center text-white hover:bg-blue-700"
             type="button">
-            <span>
-            <HiOutlinePlusCircle />
+            <span className='flex items-center'>
+            <HiOutlinePlusCircle className="mr-2"/>
               add
             </span>
           </button>
