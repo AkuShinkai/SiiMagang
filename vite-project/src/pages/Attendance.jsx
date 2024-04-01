@@ -1,5 +1,5 @@
 import React from 'react';
-import { PDFDownloadLink, Page, Text, View, Document, Stylesheet } from '@react-pdf/renderer';
+import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 function Attendance()  {
   const TABLE_HEAD = ["No.", "Nama", "Asal Sekolah", "Jurusan","Jabatan" ,"action" ];
