@@ -20,9 +20,8 @@ const Register = () => {
             name: nameRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            password_Confirmation: passwordConfirmationRef.current.value,
+            password_confirmation: passwordConfirmationRef.current.value,
         }
-        console.log(payload);
         axiosClient.post('/register', payload)
             .then(({ data }) => {
                 setUser(data.user)

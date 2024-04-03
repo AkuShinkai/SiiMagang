@@ -7,8 +7,10 @@ import classNames from 'classnames'
 import { Fragment } from 'react'
 import Searchbar from './Searchbar';
 import Logout from '../pages/Logout'
+import { useStateContext } from '../contexts/ContextProvider';
 
 const Header = ({ toggleSidebar }) => {
+    const { user } = useStateContext()
     const [showModal, setShowModal] = useState(false);
     return (
         <div className='w-full'>
@@ -99,17 +101,17 @@ const Header = ({ toggleSidebar }) => {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm m-auto items-center shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <Menu.Item>
                                     {({ active }) => (
                                         <div
                                             onClick={() => navigate('/profile')}
                                             className={classNames(
                                                 active && 'bg-gray-100',
-                                                'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
+                                                'active:bg-gray-200 rounded-sm py-2 px-0 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
-                                        ><HiOutlineUser className="inline-block mr-8" />
-                                            Your Profile
+                                        ><HiOutlineUser className="inline-block mr-5" />
+                                            {user.name}
                                         </div>
                                     )}
                                 </Menu.Item>
@@ -119,7 +121,7 @@ const Header = ({ toggleSidebar }) => {
                                             onClick={() => navigate('/settings')}
                                             className={classNames(
                                                 active && 'bg-gray-100',
-                                                'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
+                                                'active:bg-gray-200 rounded-sm py-2 px-0 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
                                         ><MdOutlineSettings className="inline-block mr-14" />
                                             Settings
@@ -134,7 +136,7 @@ const Header = ({ toggleSidebar }) => {
                                             }}
                                             className={classNames(
                                                 active && 'bg-gray-100',
-                                                'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
+                                                'active:bg-gray-200 rounded-sm py-2 px-0 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
                                         ><PiSignOutBold className="inline-block mr-12" />
                                             Sign out
