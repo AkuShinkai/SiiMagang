@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { HiOutlineBell, HiOutlineChatAlt, HiOutlineUser, HiMenu} from 'react-icons/hi'
+import { HiOutlineBell, HiOutlineChatAlt, HiOutlineUser, HiMenu } from 'react-icons/hi'
 import { MdOutlineSettings } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
 import { Menu, Popover, Transition } from '@headlessui/react'
@@ -10,15 +10,15 @@ import Logout from '../pages/Logout'
 import { useStateContext } from '../contexts/ContextProvider';
 
 const Header = ({ toggleSidebar }) => {
-    const { user } = useStateContext()
+
     const [showModal, setShowModal] = useState(false);
     return (
         <div className='w-full'>
             <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between">
                 <button className='flex sm:hidden' >
-                    <HiMenu className='text-gray-400 me-4 cursor-pointer'/>
+                    <HiMenu className='text-gray-400 me-4 cursor-pointer' />
                 </button>
-                <Searchbar/>
+                <Searchbar />
                 <div className="flex items-center gap-2 mr-2 md:mr-0">
                     <Popover className="relative">
                         {({ open }) => (
@@ -110,15 +110,15 @@ const Header = ({ toggleSidebar }) => {
                                                 active && 'bg-gray-100',
                                                 'active:bg-gray-200 rounded-sm py-2 px-0 text-gray-700 cursor-pointer focus:bg-gray-200'
                                             )}
-                                        ><HiOutlineUser className="inline-block mr-5" />
-                                            {user.name}
+                                        ><HiOutlineUser className="inline-block mr-14" />
+                                            Profile
                                         </div>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
                                         <div
-                                            onClick={() => navigate('/settings')}
+                                            onClick={() => navigate('/setting')}
                                             className={classNames(
                                                 active && 'bg-gray-100',
                                                 'active:bg-gray-200 rounded-sm py-2 px-0 text-gray-700 cursor-pointer focus:bg-gray-200'
@@ -128,22 +128,7 @@ const Header = ({ toggleSidebar }) => {
                                         </div>
                                     )}
                                 </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <div
-                                            onClick={() => {
-                                                setShowModal(true);
-                                            }}
-                                            className={classNames(
-                                                active && 'bg-gray-100',
-                                                'active:bg-gray-200 rounded-sm py-2 px-0 text-gray-700 cursor-pointer focus:bg-gray-200'
-                                            )}
-                                        ><PiSignOutBold className="inline-block mr-12" />
-                                            Sign out
-                                            {showModal && <Logout setOpen={setShowModal} />}
-                                        </div>
-                                    )}
-                                </Menu.Item>
+
                             </Menu.Items>
                         </Transition>
                     </Menu>

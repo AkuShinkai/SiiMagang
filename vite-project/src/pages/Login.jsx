@@ -20,6 +20,7 @@ function Login() {
             password: passwordRef.current.value,
 
         }
+        setErrors(null)
         axiosClient.post('/login', payload)
             .then(({ data }) => {
                 setUser(data.user)
@@ -28,7 +29,13 @@ function Login() {
             .catch(err => {
                 const response = err.response;
                 if (response && response.status === 422) {
-                    setErrors(response.data.errors)
+                    if (response.data.errors){
+                        setErrors(response.data.errors)
+                    }else{
+                        setErrors({
+                            email: [response.data.massage]
+                        })
+                    }
                 }
             })
     }
