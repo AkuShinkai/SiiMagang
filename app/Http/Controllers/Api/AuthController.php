@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response([
                 'massage' => 'Provided email address or password is incorrect'
-            ],422);
+            ], 422);
         }
 
         /** @var User $user */
@@ -36,6 +37,15 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+        ]);
+
+        // Simpan ID pengguna baru
+        $userId = $user->id;
+
+        // Buat entri baru dalam tabel user_profiles
+        UserProfile::create([
+            'users_id' => $userId,
+            // Tambahkan kolom lain yang perlu disimpan di sini
         ]);
 
         $token = $user->createToken('main')->plainTextToken;

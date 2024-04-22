@@ -22,5 +22,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
+use App\Http\Controllers\LogbookController;
+
+Route::middleware('web')->group(function () {
+    Route::post('/logbooks', [LogbookController::class, 'store']);
+    // Rute-rute lainnya...
+});
+
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+
+// routes/api.php
