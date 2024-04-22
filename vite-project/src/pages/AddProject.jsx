@@ -1,5 +1,6 @@
 import React from 'react'
 import { HiOutlinePlusCircle } from "react-icons/hi";
+import { HiOutlineChevronLeft  } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom';
 
 function AddProject()  {
@@ -9,15 +10,13 @@ function AddProject()  {
         <div className="flex justify-between ">
             <button
             onClick={()=> navigate(-1)}
-            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded ml-4" >
-                back
-            </button>
-            <button
-            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mr-4"
-            type='submit'>
-                save
+            className="inline-flex items-center bg-blue-400 text-md px-3 py-1 rounded text-white hover:bg-blue-700" >
+                <HiOutlineChevronLeft className="mr-2"/>
+              <span>                               back              </span>
+
             </button>
         </div>
+
         <div class="flex flex-col w-full max-w-md p-4 mx-auto my-8 bg-white rounded-lg shadow-md">
             <div class="flex flex-col mb-4">
               <label for="start" class="mb-2 text-sm font-medium">Start Date</label>
