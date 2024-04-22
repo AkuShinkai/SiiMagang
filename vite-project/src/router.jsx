@@ -14,6 +14,7 @@ import AddLogbook from './pages/AddLogbook.jsx'
 import Attendance from './pages/Attendance.jsx'
 import Project from './pages/Project.jsx'
 import AddProject from './pages/AddProject.jsx';
+import LandingPage from './LandingPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -60,16 +61,21 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: '/',
+        element: <LandingPage />,
+        children:[
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/register',
+                element: <Register />
+            }
+        ]
 
-    // buat navigate button di login atau register
-    // {
-    //     path: "/login",
-    //     element: <Login />,
-    // },
-    // {
-    //     path: "/register",
-    //     element: <Register />,
-    // },
+    }
 ]);
 
 export default router;

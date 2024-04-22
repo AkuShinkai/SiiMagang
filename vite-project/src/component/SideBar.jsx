@@ -34,7 +34,7 @@ export default function Sidebar() {
 					<span className="text-xl" >
 						<HiOutlineLogout />
 					</span>
-					Log Out	
+					Log Out
 				</button>
 				{showModal && <Logout setOpen={setShowModal} />}
 			</div>
