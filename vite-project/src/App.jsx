@@ -13,7 +13,7 @@ function App() {
     const { user, token } = useStateContext()
 
     if (!token) {
-        return <Navigate to="/login" />
+        return <Navigate to="/welcome" />
     }
 
     return (

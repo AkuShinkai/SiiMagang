@@ -11,7 +11,7 @@ const toggleNavbar =()=> {
 }
 const navigate = useNavigate();
   return (
-        <nav className="sticky top-0 py-3">
+        <nav className="py-4 px-6 fixed top-0 w-full z-50">
             <div className="container px-4 mx-auto relative ">
                 <div className='flex justify-between items-center'>
                     <div className='flex flex-shrink-0 items-center'>
@@ -19,12 +19,12 @@ const navigate = useNavigate();
                         <span className="text-2xl font-bold leading-tight text-gray-600 tracking-tight">SiMagang</span>
                     </div>
                     <div className='hidden lg:flex justify-center space-x-5 items-center'>
-                        <button 
+                        <button
                             onClick={() => navigate("/register")}
                             className=" items-center border border-orange-400 text-md px-3 py-1 rounded text-orange-400 hover:bg-orange-500 hover:text-white" >
                             <span>register</span>
                         </button>
-                        <button 
+                        <button
                             onClick={() => navigate("/login")}
                             className="items-center bg-orange-400 text-md px-3 py-1 rounded text-white hover:bg-orange-500" >
                             <span>login</span>
@@ -33,8 +33,8 @@ const navigate = useNavigate();
                     <div className="lg:hidden md:flex flex-col justify-end">
                       <button onClick={toggleNavbar}>
                         {mobileDrawerOpen? <HiOutlineX />: <HiMenu/>}
-                      </button>  
-                    </div> 
+                      </button>
+                    </div>
                 </div>
                 {mobileDrawerOpen && (
                     <div className="fixed right-0 z-10 bg-gray-200 w-full p-10 flex flex-col justify-center items-center lg:hidden">
@@ -46,7 +46,7 @@ const navigate = useNavigate();
                                 <a href="/login">login</a>
                             </li>
                         </ul>
-                        
+
                     </div>
                 )}
 			</div>
