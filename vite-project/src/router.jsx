@@ -15,8 +15,7 @@ import Attendance from './pages/Attendance.jsx'
 import Project from './pages/Project.jsx'
 import AddProject from './pages/AddProject.jsx';
 import LandingPage from './LandingPage.jsx';
-import Profile from './pages/Profile.jsx';
-import EditProfile from './pages/EditProfile.jsx';
+
 
 const router = createBrowserRouter([
     {
@@ -35,35 +34,27 @@ const router = createBrowserRouter([
                 path: "/AddLogbook",
                 element: <AddLogbook />
             },
-             {
-                 path: "/project",
-                 element: <Project />
-             },
-             {
+            {
+                path: "/project",
+                element: <Project />
+            },
+            {
                 path: "/addproject",
                 element: <AddProject />
             },
-            {
+             {
                  path: "/attendance",
                  element: <Attendance />
              },
-            {
-                path: "/Profile",
-                element: <Profile />
-            },
-            {
-                path: "/Editprofile",
-                element: <EditProfile />
-            },
             // {
             //     path: "/about",
             //     element: <About />
             // },
             //{
-              //   path: "/blogs/:id",
-                // element: <BlogView />,
-                //loader: ({ params }) => fetch(`http://localhost:5173/SiiMagang/${params.id}`)
-             //},
+            //   path: "/blogs/:id",
+            // element: <BlogView />,
+            //loader: ({ params }) => fetch(`http://localhost:5173/SiiMagang/${params.id}`)
+            //},
             {
                 path: "*",
                 element: <NotFound />
@@ -73,7 +64,11 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <LandingPage />,
-        children:[
+        children: [
+            {
+                path: '/welcome',
+                element: <Welcome />
+            },
             {
                 path: '/login',
                 element: <Login />
