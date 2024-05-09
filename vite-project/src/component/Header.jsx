@@ -8,9 +8,10 @@ import { Fragment } from 'react'
 import Searchbar from './Searchbar';
 import Logout from '../pages/Logout'
 import { useStateContext } from '../contexts/ContextProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ toggleSidebar }) => {
-
+    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     return (
         <div className='w-full'>
