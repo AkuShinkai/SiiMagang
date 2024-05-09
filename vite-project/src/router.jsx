@@ -15,7 +15,9 @@ import Attendance from './pages/Attendance.jsx'
 import Project from './pages/Project.jsx'
 import AddProject from './pages/AddProject.jsx';
 import LandingPage from './LandingPage.jsx';
-
+import Welcome from './pages/Welcome.jsx';
+import Profile from './pages/Profile.jsx';
+import EditProfile from './pages/EditProfile.jsx';
 
 const router = createBrowserRouter([
     {
@@ -46,6 +48,15 @@ const router = createBrowserRouter([
                  path: "/attendance",
                  element: <Attendance />
              },
+             {
+                path: "/Profile",
+                element: <Profile />
+            },
+            {
+                path: "/Editprofile",
+                element: <EditProfile />
+            },
+
             // {
             //     path: "/about",
             //     element: <About />
@@ -73,10 +84,7 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login />
             },
-            {
-                path: '/register',
-                element: <Register />
-            }
+            
         ]
 
     }
