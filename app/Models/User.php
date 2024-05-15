@@ -42,4 +42,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Event untuk membuat profil pengguna setelah pengguna berhasil didaftarkan
+        static::created(function ($user) {
+            // Buat instance profil pengguna baru
+            $userProfile = new UserProfile();
+
+            // Atur propertinya
+            $userProfile->name = $user->name; // Atur nama profil dengan nama pengguna
+            // Atur properti lainnya sesuai kebutuhan, misalnya birth_date, address, dll.
+
+            // Hubungkan profil pengguna dengan pengguna yang baru didaftarkan
+            $userProfile->users_id = $user->id;
+
+            // Simpan profil pengguna
+            $userProfile->save();
+        });
+    }
 }
