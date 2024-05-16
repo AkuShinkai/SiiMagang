@@ -63,4 +63,10 @@ class User extends Authenticatable
             $userProfile->save();
         });
     }
+
+    public function userProfile()
+    {
+        return $this->hasOne(UserProfile::class, 'users_id');
+    }
+
 }

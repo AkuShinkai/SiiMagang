@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\LogbookController;
 use App\Http\Controllers\Api\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +24,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-use App\Http\Controllers\LogbookController;
 
-Route::middleware('web')->group(function () {
-    Route::post('/logbooks', [LogbookController::class, 'store']);
-    // Rute-rute lainnya...
+Route::middleware('auth:api')->group(function () {
+    Route::get('/logbooks', [LogbookController::class, 'index']);
+
+    // Rute untuk menambahkan entri logbook baru
+    Route::post('/logbooks/add', [LogbookController::class, 'store']);
+
+    // Rute untuk memperbarui entri logbook
+    Route::put('/logbooks/{id}', [LogbookController::class, 'update']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {

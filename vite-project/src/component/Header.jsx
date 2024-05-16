@@ -142,7 +142,7 @@ const Header = ({ toggleSidebar }) => {
                                         </div>
                                     )}
                                 </Menu.Item>
-                                <Menu.Item>
+                                {/* <Menu.Item>
                                     {({ active }) => (
                                         <div
                                             onClick={() => navigate('/setting')}
@@ -154,8 +154,7 @@ const Header = ({ toggleSidebar }) => {
                                             Settings
                                         </div>
                                     )}
-                                </Menu.Item>
-
+                                </Menu.Item> */}
                             </Menu.Items>
                         </Transition>
                     </Menu>

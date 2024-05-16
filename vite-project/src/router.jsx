@@ -29,11 +29,11 @@ const router = createBrowserRouter([
                 element: <Dashboard />
             },
             {
-                path: "/LogBooks",
+                path: "/logbooks",
                 element: <Logbook />
             },
             {
-                path: "/AddLogbook",
+                path: "/addlogbook",
                 element: <AddLogbook />
             },
             {
@@ -49,11 +49,11 @@ const router = createBrowserRouter([
                 element: <Attendance />
             },
             {
-                path: "/Profile",
+                path: "/profile",
                 element: <Profile />
             },
             {
-                path: "/Editprofile",
+                path: "/editprofile",
                 element: <EditProfile />
             },
 
