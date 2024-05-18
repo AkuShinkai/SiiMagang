@@ -18,6 +18,7 @@ import LandingPage from './LandingPage.jsx';
 import Welcome from './pages/Welcome.jsx';
 import Profile from './pages/Profile.jsx';
 import EditProfile from './pages/EditProfile.jsx';
+import Submission from './pages/Submission.jsx';
 
 const router = createBrowserRouter([
     {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
             },
             {
                 path: '/register',
+                element: <Register />
+            },
+            {
+                path: '/submission',
                 element: <Register />
             }
 

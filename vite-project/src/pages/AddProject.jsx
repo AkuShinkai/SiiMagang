@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function AddProject()  {
   const navigate = useNavigate()
   return (
-    <div className=' w-full flex flex-col shadow-lg mb-6 mt-4 bg-gray-600'>
+    <div className=' w-full flex flex-col shadow-lg mb-6 mt-4 '>
         <div className="flex justify-between ">
             <button
             onClick={()=> navigate(-1)}

@@ -12,7 +12,7 @@ function Project()  {
       <div className="flex justify-end my-5 mx-5">
           <button
            onClick={handleClick}
-            className="flex bg-blue-400 text-md px-3 py-1 rounded justify-center text-white hover:bg-blue-700"
+            className="flex bg-white border-2 border-blue-400 text-md px-3 py-1 rounded-full justify-center text-blue-400 hover:bg-blue-400 hover:border-none hover:text-white"
             type="button">
             <span className='flex items-center'>
             <HiOutlinePlusCircle className='mr-2' />

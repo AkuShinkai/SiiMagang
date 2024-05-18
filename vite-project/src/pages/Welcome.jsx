@@ -1,7 +1,9 @@
 import React from "react";
 import pic from '/./src/assets/lp.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Welcome = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <section className="pt-12 pb-12 sm:pb-16 lg:pt-8">
@@ -11,7 +13,7 @@ const Welcome = () => {
                             <div className="text-center lg:text-left">
                                 <h1 className="text-4xl font-bold leading-tight text-gray-900 sm:text-5xl sm:leading-tight lg:leading-tight lg:text-6xl font-pj">PT OTAK KANAN INTERNSHIP PROGRAM </h1>
                                 <p className="mt-2 text-lg text-gray-600 sm:mt-8 font-inter">Join Our Internship Program. Our internship program is designed to offer valuable insights, mentorship, and opportunities for growth</p>
-                                <button type="submit" className=" mt-8 sm:mt-10 inline-flex px-6 py-3 text-lg font-bold text-white transition-all duration-200 bg-gray-900 rounded-lg focus:outline-none focus:bg-gray-600 font-pj hover:bg-gray-600">Bergabung Sekarang!</button>
+                                <button  onClick={handleClick} type="submit" className=" mt-8 sm:mt-10 inline-flex px-6 py-3 text-lg font-bold text-white transition-all duration-200 bg-gray-900 rounded-lg focus:outline-none focus:bg-gray-600 font-pj hover:bg-gray-600">Apply Now!</button>
                             </div>
                         </div>
                         <div>
@@ -22,6 +24,9 @@ const Welcome = () => {
             </section>
         </div>
     );
+    function handleClick () {
+        navigate('/Submission');
+    };
 }
 
 export default Welcome
