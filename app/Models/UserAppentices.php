@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Logbook extends Model
+class UserAppentices extends Model
 {
-    protected $table = 'logbooks'; // Nama tabel yang terkait dengan model Logbook
+    protected $table = 'user_apprentices';
 
     protected $fillable = [
-        'date',
-        'activity',
-        'user_profiles_id',
+
     ];
 
-    // Relasi dengan model UserProfile
+    // Relasi dengan model User
     public function userProfile()
     {
         return $this->belongsTo(UserProfile::class, 'user_profiles_id');

@@ -15,7 +15,10 @@ import Attendance from './pages/Attendance.jsx'
 import Project from './pages/Project.jsx'
 import AddProject from './pages/AddProject.jsx';
 import LandingPage from './LandingPage.jsx';
-
+import Welcome from './pages/Welcome.jsx';
+import Profile from './pages/Profile.jsx';
+import EditProfile from './pages/EditProfile.jsx';
+import Submission from './pages/Submission.jsx';
 
 const router = createBrowserRouter([
     {
@@ -27,53 +30,62 @@ const router = createBrowserRouter([
                 element: <Dashboard />
             },
             {
-                path: "/LogBooks",
+                path: "/logbooks",
                 element: <Logbook />
             },
             {
-                path: "/AddLogbook",
+                path: "/addlogbook",
                 element: <AddLogbook />
             },
-             {
-                 path: "/project",
-                 element: <Project />
-             },
-             {
+            {
+                path: "/project",
+                element: <Project />
+            },
+            {
                 path: "/addproject",
                 element: <AddProject />
             },
-             {
-                 path: "/attendance",
-                 element: <Attendance />
-             },
+            {
+                path: "/attendance",
+                element: <Attendance />
+            },
+            {
+                path: "/profile",
+                element: <Profile />
+            },
+            {
+                path: "/editprofile",
+                element: <EditProfile />
+            },
+
             // {
             //     path: "/about",
             //     element: <About />
             // },
             //{
-              //   path: "/blogs/:id",
-                // element: <BlogView />,
-                //loader: ({ params }) => fetch(`http://localhost:5173/SiiMagang/${params.id}`)
-             //},
+            //   path: "/blogs/:id",
+            // element: <BlogView />,
+            //loader: ({ params }) => fetch(`http://localhost:5173/SiiMagang/${params.id}`)
+            //},
             {
                 path: "*",
                 element: <NotFound />
             }
         ]
     },
-    // {
-    //     path: '/',
-    //     element: <LandingPage />,
-    //     children:[
-    //         {
-    //             path: '/login',
-    //             element: <Login />
-    //         }
-    //        {
-    //            path: '/register',
-    //            element: <Register />
-    //        }
-//         ]
+    {
+        path: '/',
+        element: <LandingPage />,
+        children:[
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/register',
+                element: <Register />
+            }
+        ]
 
 //    },
 

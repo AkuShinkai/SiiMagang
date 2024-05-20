@@ -9,10 +9,10 @@ const StateContext = createContext({
 
 export const ContextProvider = ({ children }) => {
     const [user, setUser] = useState({
-        name: 'Fariz'
+        name: 'User',
+        email: ''
     });
     const [token, _setToken] = useState(localStorage.getItem('ACCESS_TOKEN'));
-    // const [token, _setToken] = useState(null);
 
     const setToken = (token) => {
         _setToken(token)
@@ -23,17 +23,22 @@ export const ContextProvider = ({ children }) => {
         }
     }
 
+    // Tambahkan log untuk melihat perubahan user
+    const updateUser = (newUser) => {
+        console.log("Updating user context:", newUser);
+        setUser(newUser);
+    }
+
     return (
         <StateContext.Provider value={{
             user,
             token,
-            setUser,
+            setUser: updateUser,
             setToken
         }}>
             {children}
         </StateContext.Provider>
     )
-
 }
 
-export const useStateContext = () => useContext(StateContext)
+export const useStateContext = () => useContext(StateContext);

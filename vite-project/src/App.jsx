@@ -12,9 +12,9 @@ import { useStateContext } from './contexts/ContextProvider';
 function App() {
     // const { user, token } = useStateContext()
 
-    // if (!token) {
-    //     return <Navigate to="/login" />
-    // }
+    if (!token) {
+        return <Navigate to="/login" />
+    }
 
     return (
         <>
