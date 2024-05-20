@@ -42,11 +42,11 @@ class AuthController extends Controller
         // Simpan ID pengguna baru
         $userId = $user->id;
 
-        // // Buat entri baru dalam tabel user_profiles
-        // UserProfile::create([
-        //     'users_id' => $userId,
-        //     // Tambahkan kolom lain yang perlu disimpan di sini
-        // ]);
+        // Buat entri baru dalam tabel user_profiles
+        UserProfile::create([
+            'users_id' => $userId,
+            // Tambahkan kolom lain yang perlu disimpan di sini
+        ]);
 
         $token = $user->createToken('main')->plainTextToken;
 

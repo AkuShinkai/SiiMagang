@@ -12,7 +12,7 @@ function Logbook() {
     const [logbooks, setLogbooks] = useState([]);
 
     useEffect(() => {
-        retrieveLogbooks();
+        fetchLogbooks();
     }, []);
 
     const fetchLogbooks = async () => {

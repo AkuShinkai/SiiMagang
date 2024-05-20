@@ -3,7 +3,7 @@ import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { useStateContext } from '../contexts/ContextProvider'
-//import axiosClient from '../axios-client'
+import axiosClient from '../axios-client'
 import { Navigate } from 'react-router-dom'
 
 export default function Logout({ setOpen }) {
