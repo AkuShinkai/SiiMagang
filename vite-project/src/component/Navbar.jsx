@@ -11,7 +11,7 @@ const toggleNavbar =()=> {
 }
 const navigate = useNavigate();
   return (
-        <nav className="py-4 px-6 fixed top-0 w-full z-50">
+        <nav className="py-4 px-6 fixed top-0 w-full z-50 bg-white">
             <div className="container px-4 mx-auto relative ">
                 <div className='flex justify-between items-center'>
                     <div className='flex flex-shrink-0 items-center'>

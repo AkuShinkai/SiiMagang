@@ -2,8 +2,8 @@ import React from 'react'
 
  function Submission() {
     return (
-        <div className='max-sm m-5 rounded-xl flex flex-col shadow-md mx-32 my-14'>
-            <div className="bg-[#FF9843] p-3 rounded-t-xl"> 
+        <div className='max-sm m-5 rounded-xl flex flex-col shadow-md mx-32 my-20'>
+            <div className="bg-[#FF9843] p-3 rounded-t-xl">
                 <span  className="text-white tracking-wide uppercase font-bold mb-3">Apply Internship</span>
             </div>
                 <form action="" className="px-5 py-5 bg-white">
@@ -116,7 +116,7 @@ import React from 'react'
 
                             </div>
                         </div>
-                    </div>   
+                    </div>
 
                     <div className='md:flex mb-4'>
                         <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold mb-3'>File</div>
@@ -124,7 +124,7 @@ import React from 'react'
                             <div className="md:flex md:items-center ">
                                 <div className="md:w-1/2 md:ml-3 mb-2">
                                     <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-sp">
-                                      Surat Pengantar  
+                                      Surat Pengantar
                                     </label>
                                     <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
                                         type="file"
@@ -141,12 +141,12 @@ import React from 'react'
                                         required />
                                 </div>
                             </div>
-                                
-                            
+
+
                         </div>
                     </div>
-                    
-                    
+
+
 
                 <div className="flex justify-end gap-2 my-5">
                     <button
@@ -159,7 +159,7 @@ import React from 'react'
                         type='submit'>
                         <span>Submit</span>
                     </button>
-                </div>    
+                </div>
                 </form>
         </div>
     )

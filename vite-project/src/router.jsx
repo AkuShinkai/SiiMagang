@@ -19,6 +19,7 @@ import Welcome from './pages/Welcome.jsx';
 import Profile from './pages/Profile.jsx';
 import EditProfile from './pages/EditProfile.jsx';
 import Submission from './pages/Submission.jsx';
+import AdminDashboard from './adminpages/AdminDashboard.jsx';
 
 const router = createBrowserRouter([
     {
@@ -91,7 +92,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/submission',
-                element: <Register />
+                element: <Submission />
+            },
+            {
+                path: '/admin',
+                element: <AdminDashboard />
             }
 
         ]
