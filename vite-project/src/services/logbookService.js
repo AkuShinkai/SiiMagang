@@ -1,21 +1,21 @@
 // src/services/logbookService.js
 
-import axiosClient from '../axios-client';
+//import axiosClient from '../axios-client';
 
 const getAll = () => {
-  return axiosClient.get('/logbooks');
+//  return axiosClient.get('/logbooks');
 };
 
 const create = (data) => {
-  return axiosClient.post('/logbooks', data);
+ // return axiosClient.post('/logbooks', data);
 };
 
 const update = (id, data) => {
-  return axiosClient.put(`/logbooks/${id}`, data);
+//  return axiosClient.put(`/logbooks/${id}`, data);
 };
 
 const remove = (id) => {
-  return axiosClient.delete(`/logbooks/${id}`);
+//  return axiosClient.delete(`/logbooks/${id}`);
 };
 
 export default {
