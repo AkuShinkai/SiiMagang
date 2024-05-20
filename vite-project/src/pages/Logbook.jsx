@@ -11,7 +11,7 @@ function Logbook() {
     const [logbooks, setLogbooks] = useState([]);
 
     useEffect(() => {
-        retrieveLogbooks();
+//        retrieveLogbooks();
     }, []);
 
     const retrieveLogbooks = () => {

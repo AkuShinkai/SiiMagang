@@ -7,8 +7,8 @@ import Dashboard from './pages/Dashboard.jsx'
 import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
 import App from './App.jsx';
-import Login from './pages/Login.jsx'
-import Register from './pages/Register.jsx'
+// import Login from './pages/Login.jsx'
+//import Register from './pages/Register.jsx'
 import Logbook from './pages/Logbook.jsx'
 import AddLogbook from './pages/AddLogbook.jsx'
 import Attendance from './pages/Attendance.jsx'
@@ -61,21 +61,23 @@ const router = createBrowserRouter([
             }
         ]
     },
-    {
-        path: '/',
-        element: <LandingPage />,
-        children:[
-            {
-                path: '/login',
-                element: <Login />
-            },
-            {
-                path: '/register',
-                element: <Register />
-            }
-        ]
+    // {
+    //     path: '/',
+    //     element: <LandingPage />,
+    //     children:[
+    //         {
+    //             path: '/login',
+    //             element: <Login />
+    //         }
+    //        {
+    //            path: '/register',
+    //            element: <Register />
+    //        }
+//         ]
 
-    }
+//    },
+
+
 ]);
 
 export default router;

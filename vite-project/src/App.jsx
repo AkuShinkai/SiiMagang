@@ -2,7 +2,7 @@ import './App.css'
 import { Navigate, Outlet } from 'react-router-dom';
 import SideBar from './component/SideBar';
 import Header from './component/Header';
-import Login from './pages/Login';
+// import Login from './pages/Login';
 // import Navbar from './components/navbar';
 // import Footer from './components/Footer';
 // import ScrollButton from './components/ScrollButton';
@@ -10,11 +10,11 @@ import { useState } from 'react';
 import { useStateContext } from './contexts/ContextProvider';
 
 function App() {
-    const { user, token } = useStateContext()
+    // const { user, token } = useStateContext()
 
-    if (!token) {
-        return <Navigate to="/login" />
-    }
+    // if (!token) {
+    //     return <Navigate to="/login" />
+    // }
 
     return (
         <>
