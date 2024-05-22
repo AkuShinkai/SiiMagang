@@ -19,55 +19,51 @@ import Welcome from './pages/Welcome.jsx';
 import Profile from './pages/Profile.jsx';
 import EditProfile from './pages/EditProfile.jsx';
 import Submission from './pages/Submission.jsx';
+import AppAdmin from './AppAdmin.jsx';
 import AdminDashboard from './adminpages/AdminDashboard.jsx';
+import DataIntern from './adminpages/DataIntern.jsx';
+import InternshipQueue from './adminpages/InternshipQueue.jsx';
+import ProjectIntern from './adminpages/ProjectIntern.jsx';
+import Attend from './adminpages/Attend.jsx';
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
         children: [
-            {
-                path: "/",
-                element: <Dashboard />
-            },
-            {
-                path: "/logbooks",
-                element: <Logbook />
-            },
-            {
-                path: "/addlogbook",
-                element: <AddLogbook />
-            },
-            {
-                path: "/project",
-                element: <Project />
-            },
-            {
-                path: "/addproject",
-                element: <AddProject />
-            },
-            {
-                path: "/attendance",
-                element: <Attendance />
-            },
-            {
-                path: "/profile",
-                element: <Profile />
-            },
-            {
-                path: "/editprofile",
-                element: <EditProfile />
-            },
-
             // {
-            //     path: "/about",
-            //     element: <About />
+            //     path: "/",
+            //     element: <Dashboard />
             // },
-            //{
-            //   path: "/blogs/:id",
-            // element: <BlogView />,
-            //loader: ({ params }) => fetch(`http://localhost:5173/SiiMagang/${params.id}`)
-            //},
+            // {
+            //     path: "/logbooks",
+            //     element: <Logbook />
+            // },
+            // {
+            //     path: "/addlogbook",
+            //     element: <AddLogbook />
+            // },
+            // {
+            //     path: "/project",
+            //     element: <Project />
+            // },
+            // {
+            //     path: "/addproject",
+            //     element: <AddProject />
+            // },
+            // {
+            //     path: "/attendance",
+            //     element: <Attendance />
+            // },
+            // {
+            //     path: "/profile",
+            //     element: <Profile />
+            // },
+            // {
+            //     path: "/editprofile",
+            //     element: <EditProfile />
+            // },
+
             {
                 path: "*",
                 element: <NotFound />
@@ -93,14 +89,38 @@ const router = createBrowserRouter([
             {
                 path: '/submission',
                 element: <Submission />
-            },
+            }
+        ]
+    },
+    {
+        path: '/',
+        element: <AppAdmin />,
+        children: [
             {
                 path: '/admin',
                 element: <AdminDashboard />
+            },
+            {
+                path: '/dataintern',
+                element: <DataIntern />
+            },
+            {
+                path: '/internshipqueue',
+                element: <InternshipQueue />
+            },
+            {
+                path: '/projectintern',
+                element: <ProjectIntern />
+            },
+            {
+                path: '/attend',
+                element: <Attend />
+            },
+            {
+                path: "*",
+                element: <NotFound />
             }
-
         ]
-
     }
 ]);
 
