@@ -3,7 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 
 const Searchbar = () => {
   return (
-    <form className='flex m-5 w-[220px] relative'>
+    <form className='flex w-[220px] relative'>
       <div className='relative'>
         <button className='absolute right-1 p-4 top-1/2 -translate-y-1/2 rounded-full'>
             <AiOutlineSearch className='text-gray-400' />
