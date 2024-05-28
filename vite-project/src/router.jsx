@@ -25,44 +25,45 @@ import DataIntern from './adminpages/DataIntern.jsx';
 import InternshipQueue from './adminpages/InternshipQueue.jsx';
 import ProjectIntern from './adminpages/ProjectIntern.jsx';
 import Attend from './adminpages/Attend.jsx';
+import DataLogbook from './adminpages/DataLogbook.jsx';
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
         children: [
-            // {
-            //     path: "/",
-            //     element: <Dashboard />
-            // },
-            // {
-            //     path: "/logbooks",
-            //     element: <Logbook />
-            // },
-            // {
-            //     path: "/addlogbook",
-            //     element: <AddLogbook />
-            // },
-            // {
-            //     path: "/project",
-            //     element: <Project />
-            // },
-            // {
-            //     path: "/addproject",
-            //     element: <AddProject />
-            // },
-            // {
-            //     path: "/attendance",
-            //     element: <Attendance />
-            // },
-            // {
-            //     path: "/profile",
-            //     element: <Profile />
-            // },
-            // {
-            //     path: "/editprofile",
-            //     element: <EditProfile />
-            // },
+            {
+                path: "/",
+                element: <Dashboard />
+            },
+            {
+                path: "/logbooks",
+                element: <Logbook />
+            },
+            {
+                path: "/addlogbook",
+                element: <AddLogbook />
+            },
+            {
+                path: "/project",
+                element: <Project />
+            },
+            {
+                path: "/addproject",
+                element: <AddProject />
+            },
+            {
+                path: "/attendance",
+                element: <Attendance />
+            },
+            {
+                path: "/profile",
+                element: <Profile />
+            },
+            {
+                path: "/editprofile",
+                element: <EditProfile />
+            },
 
             {
                 path: "*",
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
             {
                 path: '/projectintern',
                 element: <ProjectIntern />
+            },
+            {
+                path: '/dataLogbook',
+                element: <DataLogbook />
             },
             {
                 path: '/attend',

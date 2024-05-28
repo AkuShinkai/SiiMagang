@@ -41,11 +41,11 @@ const Header = ({ toggleSidebar }) => {
 
     return (
         <div className='w-full'>
-            <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between">
+            <div className="bg-white h-16 px-5 flex items-center border-b border-gray-200 justify-between">
                 <button className='flex sm:hidden' >
                     <HiMenu className='text-gray-400 me-4 cursor-pointer' />
                 </button>
-                <Searchbar />
+                <Searchbar/>
                 <div className="flex items-center gap-2 mr-2 md:mr-0">
                     <Popover className="relative">
                         {({ open }) => (
