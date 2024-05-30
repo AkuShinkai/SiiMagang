@@ -4,7 +4,11 @@ import {
 	HiOutlineUsers,
 	HiOutlineQuestionMarkCircle,
     HiDesktopComputer,
-	HiOutlineCog
+	HiOutlineCog,
+	HiOutlineUserGroup,
+	HiIdentification,
+	HiOutlineClipboardList
+	
 } from 'react-icons/hi'
 
 export const DASHBOARD_SIDEBAR_LINKS = [
@@ -60,13 +64,19 @@ export const ADMIN_SIDEBAR_LINKS = [
 		key: 'user',
 		label: 'Users',
 		path: '/dataintern',
-		icon: <HiDesktopComputer />
+		icon: < HiIdentification/>
 	},
 	{
 		key: 'internshipqueue',
 		label: 'Internship Queue',
 		path: '/internshipqueue',
-		icon: <HiDesktopComputer />
+		icon: <HiOutlineUserGroup />
+	},
+	{
+		key: 'dataLogbook',
+		label: 'Data Logbook',
+		path: '/dataLogbook',
+		icon: <HiOutlineClipboardList />
 	},
 	{
 		key: 'projectAdmin',
