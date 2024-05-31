@@ -25,7 +25,6 @@ import DataIntern from './adminpages/DataIntern.jsx';
 import InternshipQueue from './adminpages/InternshipQueue.jsx';
 import ProjectIntern from './adminpages/ProjectIntern.jsx';
 import Attend from './adminpages/Attend.jsx';
-import AddMentor from './adminpages/AddMentor.jsx';
 
 const router = createBrowserRouter([
     {
@@ -112,6 +111,10 @@ const router = createBrowserRouter([
             {
                 path: '/internshipqueue',
                 element: <InternshipQueue />
+            },
+            {
+                path: '/detailsubmission',
+                element: <DetailSubmission />
             },
             {
                 path: '/projectintern',
