@@ -39,7 +39,7 @@ function Attend() {
         }
         
         return (
-          <span className={`inline-block px-3 py-1.5 rounded-full text-xs font-medium ${colorClasses}`}>
+          <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${colorClasses}`}>
             {keterangan}
           </span>
         );
