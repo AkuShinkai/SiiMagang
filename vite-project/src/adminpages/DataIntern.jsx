@@ -1,60 +1,57 @@
-import { useRef,useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HiPencil } from "react-icons/hi2";
-import profil from '../assets/nyonyo.jpg'
-import Searchbar from '../component/Searchbar'
+import Searchbar from '../component/Searchbar';
+import axiosClient from '../axios-client';
+
 const TABS = [
     {
-      label: "All",
-      value: "all",
+        label: "All",
+        value: "all",
     },
     {
-      label: "Active",
-      value: "Active",
+        label: "Active",
+        value: "Active",
     },
     {
-      label: "Inactive",
-      value: "Inactive",
+        label: "Inactive",
+        value: "Inactive",
     },
-  ];
+];
+
 function DataIntern() {
-    const img = useRef()
-    const [image, setImage] = useState(null)
+    const [data, setData] = useState([]); // State to store fetched data
     const [activeTab, setActiveTab] = useState(TABS[0].value);
-    const TABLE_HEAD = ["no","photo","nama","Education","Position","Mulai","Akhir","Status",""]; //status(active or inactive)
-    const TABLE_DATA = [{ 
-        profile_picture: {profil},
-        name: "Muhammad Fariz",
-        school: "Politeknik Negeri Madiun",
-        position: "Backend Developer",
-        start_date: "2023-01-01",
-        end_date: "2023-12-31",
-       },
-       { 
-        profile_picture: {profil},
-        name: "Avilia Indira",
-        school: "Politeknik Negeri Madiun",
-        position: "Frontend Developer",
-        start_date: "2024-01-01",
-        end_date: "2024-06-31",
-       }];
+    const img = useRef();
+    const [image, setImage] = useState(null);
+
+    useEffect(() => {
+        // Fetch data when component mounts
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            // Fetch data from backend API using axiosClient
+            const response = await axiosClient.get('/dataintern');
+            // Set fetched data to state
+            setData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
     const getStatus = (start_date, end_date) => {
         const now = new Date();
         const start = new Date(start_date);
         const end = new Date(end_date);
-        return (now >= start && now <= end) ? 'active' : 'inactive';
+        return (now >= start && now <= end) ? 'Active' : 'Inactive';
     };
-    const filteredData = TABLE_DATA.filter(({ start_date, end_date }) => {
+
+    const filteredData = data.filter(({ start_date, end_date }) => {
         const status = getStatus(start_date, end_date);
         if (activeTab === 'all') return true;
         return status === activeTab;
     });
-    const Label = ({ status }) => {
-        const colorClasses = status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
-          return (
-          <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${colorClasses}`}>
-            {status}
-          </span>
-        )};
 
     return (
         <div className='overflow-x-auto'>
@@ -78,56 +75,55 @@ function DataIntern() {
                     <table className='w-full text-left'>
                         <thead >
                             <tr className='border  border-solid border-l-0 border-r-0'>
-                            {TABLE_HEAD.map((head) => (
-                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3' key={head}>
-                                    {head}
-                                </th>
-                            ))}
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>No</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>Photo</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>Name</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>Education</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>Position</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>Mulai</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>Akhir</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'>Status</th>
+                                <th className='text-sm text-gray-400 tracking-wide uppercase p-3'></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredData.map(({ profile_picture,name, school,position,start_date, end_date}, index) => {
-                                const isLast = index === TABLE_DATA.length - 1;
-                                const rows = isLast ? "p-4" : "p-4 border-b border-blue-gray-50 ";
+                            {filteredData.map(({ profile_picture, name, institution, position, start_date, end_date }, index) => {
                                 const status = getStatus(start_date, end_date);
                                 return (
-                                    <tr key={index+1} className='border-t text-gray-500 text-sm'>
-                                        <td className={rows} >{index + 1}</td>
-                                        <td className={rows}>
-                                            <img 
-                                                src={image?image:profil} 
-                                                alt={profil} 
+                                    <tr key={index + 1} className='border-t text-gray-500 text-sm'>
+                                        <td className='p-4'>{index + 1}</td>
+                                        <td className='p-4'>
+                                            <img
+                                                src={image ? image : profile_picture}
+                                                alt={profile_picture}
                                                 className="h-10 w-10 rounded-full bg-transparent bg-cover"/>
                                         </td>
-                                        <td className={rows}>{name}</td>
-                                        <td className={rows}>{school}</td>
-                                        <td className={rows}>{position}</td>
-                                        <td className={rows}>{start_date}</td>
-                                        <td className={rows}>{end_date}</td>
-                                        <td>
-                                            <div className="w-max">
-                                                <Label status={status}/> 
-                                            </div>
+                                        <td className='p-4'>{name}</td>
+                                        <td className='p-4'>{institution}</td>
+                                        <td className='p-4'>{position}</td>
+                                        <td className='p-4'>{start_date}</td>
+                                        <td className='p-4'>{end_date}</td>
+                                        <td className='p-4'>
+                                            <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                                {status}
+                                            </span>
                                         </td>
-                                        <td>
+                                        <td className='p-4'>
                                             <div className="inline-flex gap-2">
                                                 <button>
                                                     <HiPencil className="text-gray-600"/>
                                                 </button>
                                             </div>
                                         </td>
-                                </tr>
+                                    </tr>
                                 );
                             })}
-                                
                         </tbody>
                     </table>
-                    
                 </div>
             </div>
-            
         </div>
-    )
+    );
 }
 
 export default DataIntern;

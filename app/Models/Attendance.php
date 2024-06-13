@@ -5,17 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserAppentices extends Model
+class Attendance extends Model
 {
-    protected $table = 'user_apprentices';
+    use HasFactory;
+
+    protected $table = 'attendance';
 
     protected $fillable = [
-
+        'user_profiles_id',
+        'datetime',
+        'detail',
+        'status',
     ];
 
-    // Relasi dengan model User
     public function userProfile()
     {
         return $this->belongsTo(UserProfile::class, 'user_profiles_id');
     }
 }
+

@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests;
 
-use Faker\Core\Number;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use App\Models\SubmissionMember;
 
 class RegisterRequest extends FormRequest
 {
+    public $submissionMemberName; // Tambahkan properti untuk menyimpan nama anggota
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,14 +25,26 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:55',
-            'email' => 'required|email|unique:users,email',
+            // 'name' => 'required|string|max:55',
+            'email' => [
+                'required',
+                'email',
+                'unique:users,email',
+                function ($attribute, $value, $fail) {
+                    $submissionMember = SubmissionMember::where('email', $value)->first();
+                    if (!$submissionMember || $submissionMember->status !== 'accepted') {
+                        $fail('The email address is not authorized for registration. Please make an application request first before making an account');
+                    } else {
+                        $this->submissionMemberName = $submissionMember->name; // Simpan nama anggota
+                    }
+                }
+            ],
             'password' => [
                 'required',
                 'confirmed',
                 Password::min(8)
-                ->letters()
-                ->numbers()
+                    ->letters()
+                    ->numbers()
             ]
         ];
     }

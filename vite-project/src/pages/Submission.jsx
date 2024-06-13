@@ -1,168 +1,305 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axiosClient from '../axios-client';
 
- function Submission() {
+function Submission() {
+    const [members, setMembers] = useState([
+        { id: 1, name: '', gender: '', email: '', phone: '' }
+    ]);
+    const [institution, setInstitution] = useState('');
+    const [major, setMajor] = useState('');
+    const [semester, setSemester] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [file, setFile] = useState('');
+    const [errors, setErrors] = useState({});
+    const [submissionStatus, setSubmissionStatus] = useState(null); // State untuk menyimpan status pengiriman
+
+    const addMember = () => {
+        setMembers([...members, { id: members.length + 1, name: '', gender: '', email: '', phone: '' }]);
+    };
+
+    const removeMember = (id) => {
+        setMembers(members.filter(member => member.id !== id));
+    };
+
+    const handleInputChange = (id, event) => {
+        const { name, value } = event.target || {};
+        if (name) {
+            setMembers(members.map(member => member.id === id ? { ...member, [name]: value } : member));
+        }
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const submissionData = {
+            institution,
+            major,
+            semester,
+            start_date: startDate,
+            end_date: endDate,
+            file_link: file,
+            members: members.map(({ id, ...rest }) => rest), // Exclude id field
+        };
+
+        axiosClient.post('/submissions', submissionData)
+            .then(response => {
+                console.log(response.data);
+                setSubmissionStatus('success'); // Set status pengiriman berhasil
+            })
+            .catch(error => {
+                if (error.response && error.response.data) {
+                    setErrors(error.response.data.errors);
+                }
+                setSubmissionStatus('error'); // Set status pengiriman gagal
+                console.error(error);
+            });
+    };
+
+
     return (
         <div className='max-sm m-5 rounded-xl flex flex-col shadow-md mx-32 my-20'>
             <div className="bg-[#FF9843] p-3 rounded-t-xl">
-                <span  className="text-white tracking-wide uppercase font-bold mb-3">Apply Internship</span>
+                <span className="text-white tracking-wide uppercase font-bold mb-3">Apply Internship</span>
             </div>
-                <form action="" className="px-5 py-5 bg-white">
-                    <div className='md:flex mb-4'>
-                        {/* personal information */}
-                        <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold '>Group Members</div>
-                        <div className='md:w-3/4'>
-                            <div className="md:flex md:items-center ">
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor="submission-name">Full Name</label>
-                                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="text"
-                                        id="submission-name"
-                                        required />
+
+            {submissionStatus === 'success' && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">Success!</strong>
+                    <span className="block sm:inline"> Data submitted successfully.</span>
+                </div>
+            )}
+            {submissionStatus === 'error' && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">Error!</strong>
+                    <span className="block sm:inline"> Failed to submit data.</span>
+                </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="px-5 py-5 bg-white">
+                <div className='md:flex mb-4'>
+                    <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold '>Group Members</div>
+                    <div className='md:w-3/4'>
+                        {members && members.map((member, index) => (
+                            <div key={member.id} className="mb-4 border-b-2 pb-4">
+                                <div className="md:flex md:items-center mb-2">
+                                    <div className="md:w-1/2 md:ml-3 mb-2">
+                                        <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor={`submission-name-${member.id}`}>Full Name</label>
+                                        <input
+                                            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                            type="text"
+                                            id={`submission-name-${member.id}`}
+                                            name="name"
+                                            value={member.name}
+                                            onChange={(e) => handleInputChange(member.id, e)}
+                                            required
+                                        />
+                                        {errors[`members.${index}.name`] && (
+                                            <span className="text-red-500 text-sm">{errors[`members.${index}.name`]}</span>
+                                        )}
+                                    </div>
+                                    <div className="md:w-1/2 md:ml-3 mb-2">
+                                        <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor={`submission-gender-${member.id}`}>Gender</label>
+                                        <select
+                                            id={`submission-gender-${member.id}`}
+                                            className="form-select bg-gray-200 border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                            name="gender"
+                                            value={member.gender}
+                                            onChange={(e) => handleInputChange(member.id, e)}
+                                            required
+                                        >
+                                            <option value="">Choose Gender</option>
+                                            <option value="female">Female</option>
+                                            <option value="male">Male</option>
+                                        </select>
+                                        {errors[`members.${index}.gender`] && (
+                                            <span className="text-red-500 text-sm">{errors[`members.${index}.gender`]}</span>
+                                        )}
+                                    </div>
                                 </div>
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor="submission-gender">Gender</label>
-                                    <select
-                                        id="submission-gender"
-                                        className="form-select bg-gray-200 border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
-                                        name="gender"
-                                        required
+                                <div className="md:flex md:items-center mb-2">
+                                    <div className="md:w-1/2 md:ml-3 mb-2">
+                                        <label className="text-left block text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor={`submission-email-${member.id}`}>Email</label>
+                                        <input
+                                            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                            type="email"
+                                            id={`submission-email-${member.id}`}
+                                            name="email"
+                                            value={member.email}
+                                            onChange={(e) => handleInputChange(member.id, e)}
+                                            required
+                                        />
+                                        {errors[`members.${index}.email`] && (
+                                            <span className="text-red-500 text-sm">{errors[`members.${index}.email`]}</span>
+                                        )}
+                                    </div>
+                                    <div className="md:w-1/2 md:ml-3 mb-2">
+                                        <label className="text-left block text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor={`submission-phone-${member.id}`}>Phone Number</label>
+                                        <input
+                                            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] no-spinner"
+                                            type="number"
+                                            id={`submission-phone-${member.id}`}
+                                            name="phone"
+                                            value={member.phone}
+                                            onChange={(e) => handleInputChange(member.id, e)}
+                                            required
+                                        />
+                                        {errors[`members.${index}.phone`] && (
+                                            <span className="text-red-500 text-sm">{errors[`members.${index}.phone`]}</span>
+                                        )}
+                                    </div>
+                                </div>
+                                {members.length > 1 && (
+                                    <button
+                                        type="button"
+                                        className="bg-red-500 text-white py-1 px-3 rounded-full"
+                                        onClick={() => removeMember(member.id)}
                                     >
-                                        <option value="">Choose Gender</option>
-                                        <option value="female">Female</option>
-                                        <option value="male">Male</option>
-                                    </select>
-                                </div>
+                                        Remove
+                                    </button>
+                                )}
                             </div>
-
-                            <div className="md:flex md:items-center ">
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-email">Email</label>
-                                    <input className="bg-gray-200  appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="email"
-                                        id="submission-email"
-                                        required/>
-                                </div>
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-phone">Phone Number </label>
-                                    <input className="bg-gray-200  appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="number"
-                                        id="submission-phone"
-                                        required/>
-                                </div>
-                            </div>
-
-                            <div className="md:flex md:items-center ">
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-cv">CV</label>
-                                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="file"
-                                        id="submission-cv"
-                                        required />
-                                </div>
-                            </div>
-                         </div>
+                        ))}
+                        <button
+                            type="button"
+                            className="bg-green-500 text-white py-2 px-4 rounded-full"
+                            onClick={addMember}
+                        >
+                            Add Member
+                        </button>
                     </div>
-                    {/* edu */}
-                    <div className='md:flex mb-4'>
-                        <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold mb-3'>Education</div>
-                        <div className='md:w-3/4'>
-                            <div className="md:flex md:items-center ">
-                                <div className="md:w-1/3 md:ml-3 mb-2">
-                                    <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor="submission-sch">College</label>
-                                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="text"
-                                        id="submission-sch"
-                                        required />
-                                </div>
+                </div>
 
-                                <div className="md:w-1/3 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-major">Major</label>
-                                    <input className="bg-gray-200  appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="text"
-                                        id="submission-major"
-                                        required />
-                                </div>
-
-                                <div className="md:w-1/3 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-semester">Semester</label>
-                                    <input className="bg-gray-200  appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="text"
-                                        id="submission-semester"
-                                        required />
-                                </div>
+                {/* Education */}
+                <div className='md:flex mb-4'>
+                    <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold mb-3'>Education</div>
+                    <div className='md:w-3/4'>
+                        <div className="md:flex md:items-center">
+                            <div className="md:w-1/3 md:ml-3 mb-2">
+                                <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor="submission-sch">institution</label>
+                                <input
+                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                    type="text"
+                                    id="submission-sch"
+                                    value={institution}
+                                    onChange={(e) => setInstitution(e.target.value)}
+                                    required
+                                />
+                                {errors.institution && (
+                                    <span className="text-red-500 text-sm">{errors.institution}</span>
+                                )}
+                            </div>
+                            <div className="md:w-1/3 md:ml-3 mb-2">
+                                <label className="text-left block text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-major">Major</label>
+                                <input
+                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                    type="text"
+                                    id="submission-major"
+                                    value={major}
+                                    onChange={(e) => setMajor(e.target.value)}
+                                    required
+                                />
+                                {errors.major && (
+                                    <span className="text-red-500 text-sm">{errors.major}</span>
+                                )}
+                            </div>
+                            <div className="md:w-1/3 md:ml-3 mb-2">
+                                <label className="text-left block text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-semester">Semester</label>
+                                <input
+                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] no-spinner"
+                                    type="number"
+                                    id="submission-semester"
+                                    value={semester}
+                                    onChange={(e) => setSemester(e.target.value)}
+                                    required
+                                />
+                                {errors.semester && (
+                                    <span className="text-red-500 text-sm">{errors.semester}</span>
+                                )}
                             </div>
                         </div>
                     </div>
-                    {/* duration intern */}
-                    <div className='md:flex mb-4'>
-                        <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold mb-3'>Duration of Internship</div>
-                        <div className='md:w-3/4'>
-                            <div className="md:flex md:items-center ">
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor="submission-startdate" >Start Date</label>
-                                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="date"
-                                        id="submission-startdate"
-                                        required />
-                                </div>
+                </div>
 
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-enddate">End Date</label>
-                                    <input className="bg-gray-200  appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="date"
-                                        id="submission-enddate"
-                                        required />
-                                </div>
-
+                {/* Duration of Internship */}
+                <div className='md:flex mb-4'>
+                    <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold mb-3'>Duration of Internship</div>
+                    <div className='md:w-3/4'>
+                        <div className="md:flex md:items-center">
+                            <div className="md:w-1/2 md:ml-3 mb-2">
+                                <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm" htmlFor="submission-startdate">Start Date</label>
+                                <input
+                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                    type="date"
+                                    id="submission-startdate"
+                                    value={startDate}
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                    required
+                                />
+                                {errors.start_date && (
+                                    <span className="text-red-500 text-sm">{errors.start_date}</span>
+                                )}
+                            </div>
+                            <div className="md:w-1/2 md:ml-3 mb-2">
+                                <label className="text-left block text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-enddate">End Date</label>
+                                <input
+                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                    type="date"
+                                    id="submission-enddate"
+                                    value={endDate}
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                    required
+                                />
+                                {errors.end_date && (
+                                    <span className="text-red-500 text-sm">{errors.end_date}</span>
+                                )}
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className='md:flex mb-4'>
-                        <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold mb-3'>File</div>
-                        <div className='md:w-3/4'>
-                            <div className="md:flex md:items-center ">
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-sp">
-                                      Surat Pengantar
-                                    </label>
-                                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="file"
-                                        id="submission-sp"
-                                        required />
-                                </div>
-                                <div className="md:w-1/2 md:ml-3 mb-2">
-                                    <label className="text-left block  text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-prop">
-                                        Proposal
-                                    </label>
-                                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843] "
-                                        type="file"
-                                        id="submission-prop"
-                                        required />
-                                </div>
+                {/* File */}
+                <div className='md:flex mb-4'>
+                    <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold mb-3'>Files</div>
+                    <div className='md:w-3/4'>
+                        <div className="md:flex md:items-center">
+                            <div className="md:w-1/2 md:ml-3 mb-2">
+                                <label className="text-left block text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide" htmlFor="submission-sp">File Pendukung (Google Drive Link)</label>
+                                <p className="text-sm text-left text-gray-600 mb-2">CV, Surat Pengantar, Proposal</p>
+                                <input
+                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#FF9843]"
+                                    type="url"
+                                    id="submission-sp"
+                                    value={file}
+                                    onChange={(e) => setFile(e.target.value)}
+                                    required
+                                />
+                                {errors.file_link && (
+                                    <span className="text-red-500 text-sm">{errors.file_link}</span>
+                                )}
                             </div>
-
-
                         </div>
                     </div>
-
-
+                </div>
 
                 <div className="flex justify-end gap-2 my-5">
-                    <button
+                    <a
+                        href="#"
                         onClick={() => window.history.back()}
-                        className="inline-flex items-center bg-none border-2 border-gray-500 text-md px-5 py-2 rounded-full text-gray-500 hover:text-white  hover:bg-red-600" >
-                        <span className=''>Cancel</span>
-                    </button>
+                        className="inline-flex items-center bg-none border-2 border-gray-500 text-md px-5 py-2 rounded-full text-gray-500 hover:text-white  hover:bg-red-600"
+                    >
+                        <span>Cancel</span>
+                    </a>
                     <button
                         className="inline-flex items-center bg-[#FF9843] text-md px-5 py-2 rounded-full text-white hover:bg-orange-300"
-                        type='submit'>
+                        type='submit'
+                    >
                         <span>Submit</span>
                     </button>
                 </div>
-                </form>
+            </form>
         </div>
-    )
+    );
 }
+
 export default Submission;
 

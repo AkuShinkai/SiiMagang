@@ -13,7 +13,7 @@ function EditProfil() {
         gender: "",
         phone: "",
         address: "",
-        roles: "apprentice",
+
         email: "",
         degree: "",
         school: "",
@@ -26,7 +26,14 @@ function EditProfil() {
 
     useEffect(() => {
         fetchProfileData();
+        fetchEducationData();
     }, []);
+
+    const [educationData, setEducationData] = useState({
+        major: "",
+        institution: "",
+        semester: "",
+    });
 
     const fetchProfileData = async () => {
         try {
@@ -37,6 +44,26 @@ function EditProfil() {
         } catch (error) {
             console.error("Error fetching profile data:", error);
             setIsLoading(false);
+        }
+    };
+
+    const fetchEducationData = async () => {
+        try {
+            const response = await axiosClient.get("/submissions"); // Ganti dengan endpoint yang sesuai
+            const data = response.data;
+            console.log("Fetched Education Data:", data);
+            // Jika terdapat data submission, ambil data pendidikan dari submission pertama
+            if (data.length > 0) {
+                const submission = data[0];
+                const education = {
+                    major: submission.major,
+                    institution: submission.institution,
+                    semester: submission.semester,
+                };
+                setEducationData(education);
+            }
+        } catch (error) {
+            console.error("Error fetching education data:", error);
         }
     };
 
@@ -119,7 +146,7 @@ function EditProfil() {
                                     value={profileData.name}
                                     onChange={handleChange}
                                     maxLength={90}
-                                    required
+                                    disabled
                                 />
                             </div>
 
@@ -197,7 +224,7 @@ function EditProfil() {
                                     name="phone"
                                     value={profileData.phone}
                                     onChange={handleChange}
-                                    maxLength={15}
+                                    maxLength={20}
                                     required />
                             </div>
                         </div>
@@ -226,8 +253,8 @@ function EditProfil() {
                                     type="text"
                                     id="profil-degree"
                                     name="degree"
-                                    value={profileData.degree}
-                                    onChange={handleChange}
+                                    value={educationData.major}
+                                    disabled
                                 />
                             </div>
 
@@ -239,8 +266,8 @@ function EditProfil() {
                                     type="text"
                                     id="profil-school"
                                     name="school"
-                                    value={profileData.school}
-                                    onChange={handleChange}
+                                    value={educationData.institution}
+                                    disabled
                                 />
                             </div>
                             <div className="md:w-1/3 md:ml-3 mb-6">
@@ -251,8 +278,8 @@ function EditProfil() {
                                     type="text"
                                     id="profil-semester"
                                     name="semester"
-                                    value={profileData.semester}
-                                    onChange={handleChange}
+                                    value={educationData.semester}
+                                    disabled
                                 />
                             </div>
                         </div>

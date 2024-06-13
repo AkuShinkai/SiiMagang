@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\UserProfile;
-use Illuminate\Support\Facades\Auth; // Import Auth untuk menggunakan method user()
+use App\Models\Submission;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -19,6 +20,20 @@ class ProfileController extends Controller
 
         // Menambahkan email ke dalam data profil
         $profile->email = $email;
+
+        // Ambil submission berdasarkan email pengguna
+        $submission = Submission::whereHas('submissionMembers', function ($query) use ($email) {
+            $query->where('email', $email);
+        })->first();
+
+        // Jika submission ditemukan, tambahkan informasi pendidikan ke dalam data profil
+        if ($submission) {
+            $profile->education = [
+                'major' => $submission->major,
+                'institution' => $submission->institution,
+                'semester' => $submission->semester,
+            ];
+        }
 
         return response()->json($profile);
     }

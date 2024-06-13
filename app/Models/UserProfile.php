@@ -19,9 +19,25 @@ class UserProfile extends Model
         'users_id',
     ];
 
-    // Relasi dengan model User
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function userApprentices()
+    {
+        return $this->hasMany(UserApprentices::class, 'users_id');
+    }
+
+    public function submissions()
+    {
+        return $this->hasManyThrough(
+            Submission::class,
+            UserApprentices::class,
+            'users_id',
+            'id',
+            'id',
+            'submissions_id'
+        );
     }
 }

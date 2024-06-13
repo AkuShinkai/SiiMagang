@@ -1,44 +1,57 @@
 import React, { useRef, useState } from "react";
-import login from "../assets/login.jpg"
+import login from "../assets/login.jpg";
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from "../contexts/ContextProvider";
 import axiosClient from "../axios-client";
 
 function Login() {
-   const navigate = useNavigate();
-   const emailRef = useRef();
-   const passwordRef = useRef();
-   const [errors, setErrors] = useState(null)
-   const { setUser, setToken } = useStateContext()
+    const navigate = useNavigate();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const [errors, setErrors] = useState(null);
+    const { setUser, setToken } = useStateContext();
 
-   const onSubmit = (ev) => {
-       ev.preventDefault()
+    const onSubmit = (ev) => {
+        ev.preventDefault();
 
         const payload = {
-
             email: emailRef.current.value,
             password: passwordRef.current.value,
+        };
 
-        }
-        setErrors(null)
+        setErrors(null);
         axiosClient.post('/login', payload)
             .then(({ data }) => {
-                setUser(data.user)
-                setToken(data.token)
+                setUser(data.user);
+                setToken(data.token);
+                // Menetapkan peran pengguna ke dalam state atau localStorage
+                localStorage.setItem('USER_ROLES', data.roles);
+                setUser(data.user, data.roles); // Memperbarui state user dengan roles
+                setToken(data.token);
+
+                // Periksa roles dan arahkan ke halaman yang sesuai
+                if (data.roles === "mentor") {
+                    navigate('/admin');
+                } else if (data.roles === "apprentice") {
+                    navigate('/');
+                }
+                console.log(data)
             })
+
             .catch(err => {
                 const response = err.response;
                 if (response && response.status === 422) {
                     if (response.data.errors) {
-                        setErrors(response.data.errors)
+                        setErrors(response.data.errors);
                     } else {
                         setErrors({
-                            email: [response.data.massage]
-                        })
+                            email: [response.data.message]
+                        });
                     }
                 }
-            })
-    }
+            });
+
+    };
 
     return (
         <section className="bg-gray-50 min-h-screen flex items-center justify-center">
@@ -90,16 +103,15 @@ function Login() {
                     </div>
                 </div>
 
-
                 <div className="md:block hidden w-1/2">
                     <img className="rounded-2xl" src={login} />
                 </div>
             </div>
         </section>
+    );
 
-    )
     function handleClick() {
-        navigate("/register")
+        navigate("/register");
     }
 };
 

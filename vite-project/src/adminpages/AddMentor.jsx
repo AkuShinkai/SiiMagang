@@ -13,23 +13,23 @@ const AddMentor = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch('/api/add-mentor', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(mentor)
-            });
-            if (response.ok) {
-                alert('Mentor added successfully!');
-                navigate('/admin-dashboard');
-            } else {
-                alert('Failed to add mentor.');
-            }
-        } catch (error) {
-            console.error('Error adding mentor:', error);
-        }
+        // try {
+        //     const response = await fetch('/api/add-mentor', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(mentor)
+        //     });
+        //     if (response.ok) {
+        //         alert('Mentor added successfully!');
+        //         navigate('/admin-dashboard');
+        //     } else {
+        //         alert('Failed to add mentor.');
+        //     }
+        // } catch (error) {
+        //     console.error('Error adding mentor:', error);
+        // }
     };
 
     const handleBackClick = () => {

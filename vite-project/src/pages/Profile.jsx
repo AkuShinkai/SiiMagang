@@ -7,8 +7,9 @@ import axiosClient from '../axios-client';
 
 function Profile() {
 
+    const { user, setUser } = useStateContext();
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
-
     const [profileData, setProfileData] = useState({
         name: "",
         birth_date: "",
@@ -17,14 +18,17 @@ function Profile() {
         address: "",
         phone: "",
         email: "",
-        roles: "apprentice",
     });
 
-    const { user, setUser } = useStateContext();
-    const navigate = useNavigate();
+    const [educationData, setEducationData] = useState({
+        major: "",
+        institution: "",
+        semester: "",
+    });
 
     useEffect(() => {
         fetchProfileData();
+        fetchEducationData();
     }, []);
 
     const fetchProfileData = async () => {
@@ -34,12 +38,33 @@ function Profile() {
             console.log("Fetched Profile Data:", data);
             setProfileData(data);
             setUser(data);
-            setIsLoading(false); // Set isLoading to false when data is fetched
+            setIsLoading(false);
         } catch (error) {
             console.error("Error fetching profile data:", error);
-            setIsLoading(false); // Set isLoading to false when error occurs
+            setIsLoading(false);
         }
     };
+
+    const fetchEducationData = async () => {
+        try {
+            const response = await axiosClient.get("/submissions"); // Ganti dengan endpoint yang sesuai
+            const data = response.data;
+            console.log("Fetched Education Data:", data);
+            // Jika terdapat data submission, ambil data pendidikan dari submission pertama
+            if (data.length > 0) {
+                const submission = data[0];
+                const education = {
+                    major: submission.major,
+                    institution: submission.institution,
+                    semester: submission.semester,
+                };
+                setEducationData(education);
+            }
+        } catch (error) {
+            console.error("Error fetching education data:", error);
+        }
+    };
+
 
     return (
         <div className='max-sm m-5 rounded-xl flex flex-col shadow-md mb-6 mt-4 px-5 py-5 bg-white'>
@@ -118,22 +143,22 @@ function Profile() {
                         <div className="md:flex md:items-center">
                             <div className="md:w-1/3 mb-6">
                                 <label className="tracking-wide block uppercase font-bold text-left text-gray-500 mb-1 text-sm">
-                                    Degree
+                                    Major
                                 </label>
-                                <p className='text-left text-gray-600 tracking-wider text-lg'>Teknologi Informasi</p>
+                                <p className='text-left text-gray-600 tracking-wider text-lg'>{educationData.major}</p>
                             </div>
 
                             <div className="md:w-1/3 md:ml-3 mb-6">
                                 <label className="text-left block text-gray-500 font-bold mb-1 uppercase text-sm tracking-wide">
-                                    School/University
+                                    Institution
                                 </label>
-                                <p className='text-left text-gray-600 tracking-wider text-lg'>Politeknik Negeri Madiun</p>
+                                <p className='text-left text-gray-600 tracking-wider text-lg'>{educationData.institution}</p>
                             </div>
                             <div className="md:w-1/3 md:ml-3 mb-6">
                                 <label className="text-left block text-gray-500 font-bold mb-1 uppercase tracking-wide">
                                     Semester
                                 </label>
-                                <p className='text-left text-gray-600 tracking-wider text-lg'>4</p>
+                                <p className='text-left text-gray-600 tracking-wider text-lg'>{educationData.semester}</p>
                             </div>
                         </div>
                     </div>

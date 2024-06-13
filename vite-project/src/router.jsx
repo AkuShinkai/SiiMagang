@@ -1,18 +1,15 @@
-import React from 'react'
-import './index.css'
-import {
-    createBrowserRouter,
-} from "react-router-dom";
-import Dashboard from './pages/Dashboard.jsx'
+import React, { useEffect } from 'react';
+import { createBrowserRouter, Navigate, Route, useNavigate } from 'react-router-dom';
+import Dashboard from './pages/Dashboard.jsx';
 import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
 import App from './App.jsx';
-import Login from './pages/Login.jsx'
-import Register from './pages/Register.jsx'
-import Logbook from './pages/Logbook.jsx'
-import AddLogbook from './pages/AddLogbook.jsx'
-import Attendance from './pages/Attendance.jsx'
-import Project from './pages/Project.jsx'
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import Logbook from './pages/Logbook.jsx';
+import AddLogbook from './pages/AddLogbook.jsx';
+import Attendance from './pages/Attendance.jsx';
+import Project from './pages/Project.jsx';
 import AddProject from './pages/AddProject.jsx';
 import LandingPage from './LandingPage.jsx';
 import Welcome from './pages/Welcome.jsx';
@@ -25,14 +22,17 @@ import DataIntern from './adminpages/DataIntern.jsx';
 import InternshipQueue from './adminpages/InternshipQueue.jsx';
 import ProjectIntern from './adminpages/ProjectIntern.jsx';
 import Attend from './adminpages/Attend.jsx';
+import { useStateContext } from './contexts/ContextProvider';
+import DetailSubmission from './adminpages/DetailSubmission.jsx';
 
 const router = createBrowserRouter([
+
     {
-        path: "/",
+        path: '/',
         element: <App />,
         children: [
             {
-                path: "/",
+                path: '/',
                 element: <Dashboard />
             },
             {
@@ -63,7 +63,6 @@ const router = createBrowserRouter([
                 path: "/editprofile",
                 element: <EditProfile />
             },
-
             {
                 path: "*",
                 element: <NotFound />
@@ -89,6 +88,10 @@ const router = createBrowserRouter([
             {
                 path: '/submission',
                 element: <Submission />
+            },
+            {
+                path: "*",
+                element: <NotFound />
             }
         ]
     },
@@ -101,10 +104,6 @@ const router = createBrowserRouter([
                 element: <AdminDashboard />
             },
             {
-                path: '/addmentor',
-                element: <AddMentor />
-            },
-            {
                 path: '/dataintern',
                 element: <DataIntern />
             },
@@ -113,17 +112,13 @@ const router = createBrowserRouter([
                 element: <InternshipQueue />
             },
             {
-                path: '/detailsubmission',
+                path: '/detailsubmission/:id', // Tambahkan parameter ID ke rute
                 element: <DetailSubmission />
             },
             {
                 path: '/projectintern',
                 element: <ProjectIntern />
             },
-//            {
-//                path: '/dataLogbook',
-//                element: <DataLogbook />
-//            },
             {
                 path: '/attend',
                 element: <Attend />

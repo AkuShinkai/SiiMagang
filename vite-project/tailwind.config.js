@@ -7,6 +7,18 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-spinner::-webkit-outer-spin-button, .no-spinner::-webkit-inner-spin-button': {
+          '-webkit-appearance': 'none',
+          'margin': '0',
+        },
+        '.no-spinner': {
+          '-moz-appearance': 'textfield',
+        },
+      })
+    }
+  ],
 }
 
