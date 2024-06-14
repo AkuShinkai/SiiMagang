@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Link, useLocation } from 'react-router-dom'
-import { FcAbout, FcBullish, FcList } from 'react-icons/fc'
 import { HiOutlineLogout } from 'react-icons/hi'
 import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_LINKS } from '../lib/constants'
 import logo from '../assets/SiMagang.png'
@@ -11,9 +10,9 @@ const linkClass =
 	'flex items-center gap-2 font-light px-3 py-2 hover:bg-[#FF9843] hover:no-underline hover:text-white active:text-white active:bg-[#FF9843] rounded-full text-base'
 
 export default function Sidebar() {
-    const [showModal, setShowModal] = useState(false);
+	    const [showModal, setShowModal] = useState(false);
 	return (
-		<div className="bg-white  p-3 flex flex-col">
+		<div className="hidden bg-white p-3 md:flex flex-col">
 			<div className="flex items-center gap-2 px-1">
             <img src={logo} alt="Your Icon" style={{ width: '50px', height: '50px' }} />
 				<span className="text-gray-600 text-lg font-bold">SiMagang</span>

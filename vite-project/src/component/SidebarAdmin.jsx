@@ -12,7 +12,7 @@ const linkClass =
 export default function SidebarAdmin() {
     const [showModal, setShowModal] = useState(false);
 	return (
-		<div className="bg-gray-400 p-3 flex flex-col">
+		<div className="hidden bg-gray-400 p-3 md:flex flex-col">
 			{/* <div className="flex items-center gap-2 px-1">
             <img src={logo} alt="Your Icon" style={{ width: '50px', height: '50px' }} />
 				<span className="text-gray-600 text-lg font-bold">ADMIN</span>
@@ -47,7 +47,7 @@ function SidebarLink({ link }) {
 	return (
 		<Link
 			to={link.path}
-			className={classNames(pathname === link.path ? 'bg-orange-300 text-black' : 'text-white', linkClass)}
+			className={classNames(pathname === link.path ? 'bg-orange-300 text-white' : 'text-white', linkClass)}
 		>
 			<span className="text-xl">{link.icon}</span>
 			{link.label}

@@ -24,6 +24,8 @@ import ProjectIntern from './adminpages/ProjectIntern.jsx';
 import Attend from './adminpages/Attend.jsx';
 import { useStateContext } from './contexts/ContextProvider';
 import DetailSubmission from './adminpages/DetailSubmission.jsx';
+import DataLogbook from './adminpages/DataLogbook.jsx';
+
 
 const router = createBrowserRouter([
 
@@ -110,6 +112,10 @@ const router = createBrowserRouter([
             {
                 path: '/internshipqueue',
                 element: <InternshipQueue />
+            },
+            {
+                path: '/datalogbook',
+                element: <DataLogbook />
             },
             {
                 path: '/detailsubmission/:id', // Tambahkan parameter ID ke rute
