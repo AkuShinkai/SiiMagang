@@ -3,7 +3,7 @@ import axiosClient from '../axios-client';
 
 function Attendance() {
     const TABLE_HEAD = ["No.", "Name", "Institution", "Major", "Time", "Detail", "Status"];
-    const TABLE_COLUMN_WIDTHS = ["50px", "100px", "100px", "100px", "100px", "100px", "100px"];
+    const TABLE_COLUMN_WIDTHS = ["20px", "100px", "100px", "100px", "100px", "100px", "100px"];
 
     const [attendanceData, setAttendanceData] = useState({
         detail: 'hadir', // Default value
@@ -105,13 +105,13 @@ function Attendance() {
                     <h3 className='font-semibold text-lg p-4 m-auto'></h3>
                 </div>
 
-                <table className='w-full'>
+                <table className='w-full border'>
                     <thead>
-                        <tr className='border border-solid border-l-0 border-r-0 capitalize'>
+                        <tr className='border border-solid capitalize'>
                             {TABLE_HEAD.map((head, index) => (
                                 <th
                                     key={head}
-                                    className='text-md px-6 py-3'
+                                    className='text-md px-6 py-3 border'
                                     style={{ width: TABLE_COLUMN_WIDTHS[index] }}
                                 >
                                     {head}
@@ -121,14 +121,14 @@ function Attendance() {
                     </thead>
                     <tbody>
                         {attendanceList.map((attendance, index) => (
-                            <tr key={attendance.id}>
-                                <td style={{ width: TABLE_COLUMN_WIDTHS[0] }}>{index + 1}</td>
-                                <td style={{ width: TABLE_COLUMN_WIDTHS[1] }}>{attendance.user_profile.name}</td>
-                                <td style={{ width: TABLE_COLUMN_WIDTHS[2] }}>{attendance.user_profile.institution}</td>
-                                <td style={{ width: TABLE_COLUMN_WIDTHS[3] }}>{attendance.user_profile.major}</td>
-                                <td style={{ width: TABLE_COLUMN_WIDTHS[4] }}>{attendance.datetime}</td>
-                                <td style={{ width: TABLE_COLUMN_WIDTHS[5] }}>{attendance.detail}</td>
-                                <td style={{ width: TABLE_COLUMN_WIDTHS[5] }}>{attendance.status}</td>
+                            <tr key={attendance.id} className='border capitalize'>
+                                <td style={{ width: TABLE_COLUMN_WIDTHS[0] }} className='border'>{index + 1}</td>
+                                <td style={{ width: TABLE_COLUMN_WIDTHS[1] }} className='border'>{attendance.user_profile.name}</td>
+                                <td style={{ width: TABLE_COLUMN_WIDTHS[2] }} className='border'>{attendance.user_profile.institution}</td>
+                                <td style={{ width: TABLE_COLUMN_WIDTHS[3] }} className='border'>{attendance.user_profile.major}</td>
+                                <td style={{ width: TABLE_COLUMN_WIDTHS[4] }} className='border'>{attendance.datetime}</td>
+                                <td style={{ width: TABLE_COLUMN_WIDTHS[5] }} className='border'>{attendance.detail}</td>
+                                <td style={{ width: TABLE_COLUMN_WIDTHS[5] }} className='border'>{attendance.status}</td>
                             </tr>
                         ))}
                     </tbody>

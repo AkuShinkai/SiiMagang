@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\SubmissionMember;
@@ -129,5 +130,33 @@ class ProjectsController extends Controller
         $project->delete();
 
         return response()->json(['message' => 'Project deleted successfully.']);
+    }
+
+    public function allProjects()
+    {
+        // Ambil semua proyek dengan relasi submission
+        $projects = Project::with('submission')->get();
+
+        // Siapkan data proyek untuk dikirim sebagai response
+        $projectsData = $projects->map(function ($project) {
+            // Ambil submission yang terkait dengan proyek ini
+            $submission = $project->submission;
+
+            // Ambil institution dari submission jika ada, jika tidak setel ke 'N/A'
+            $education = $submission ? $submission->institution : 'N/A';
+
+            return [
+                'id' => $project->id,
+                'name' => $project->name,
+                'description' => $project->description,
+                'start_date' => $project->start_date,
+                'end_date' => $project->end_date,
+                'repository' => $project->repository,
+                'education' => $education, // atau field education lain yang relevan
+            ];
+        });
+
+        // Mengirim response dalam bentuk JSON
+        return response()->json($projectsData);
     }
 }

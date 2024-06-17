@@ -12,4 +12,9 @@ class Project extends Model
     protected $fillable = [
         'name', 'description', 'start_date', 'end_date', 'repository', 'submissions_id'
     ];
+
+    public function submission()
+    {
+        return $this->belongsTo(Submission::class, 'submissions_id');
+    }
 }

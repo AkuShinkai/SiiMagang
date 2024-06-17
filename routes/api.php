@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProjectsController;
 use App\Http\Controllers\Api\SubmissionController;
 use App\Http\Controllers\Api\UserApprenticeController;
+use App\Models\Logbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -71,7 +72,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/projects/{id}', [ProjectsController::class, 'update']);
     Route::delete('/projects/{id}', [ProjectsController::class, 'destroy']);
 
-
     // Route::get('/userApprentices', [UserApprenticeController::class, 'getUserApprentices']);
 });
 
@@ -79,4 +79,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
-// routes/api.php
+// project
+
+Route::get('/projects/all', [ProjectsController::class, 'allProjects']);
+Route::get('/attendance/all', [AttendanceController::class, 'allAttendance']);
+Route::get('/logbook/all', [LogbookController::class, 'allLogbook']);

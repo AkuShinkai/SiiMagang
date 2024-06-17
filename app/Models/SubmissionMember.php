@@ -26,9 +26,4 @@ class SubmissionMember extends Model
     {
         return $this->belongsTo(Submission::class, 'submissions_id');
     }
-
-    // public function projects()
-    // {
-    //     return $this->belongsToMany(Project::class, 'user_apprentices', 'submissions_id', 'projects_id');
-    // }
 }

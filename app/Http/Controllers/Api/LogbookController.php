@@ -66,4 +66,19 @@ class LogbookController extends Controller
 
         return response()->json($logbook);
     }
+
+    public function allLogbook()
+    {
+        $logbooks = Logbook::with('userProfile.user')->get();
+        $logbookList = $logbooks->map(function ($logbook) {
+            return [
+                'id' => $logbook->id,
+                'date' => $logbook->date,
+                'activity' => $logbook->activity,
+                'name' => $logbook->userProfile->name,
+            ];
+        });
+
+        return response()->json($logbookList);
+    }
 }

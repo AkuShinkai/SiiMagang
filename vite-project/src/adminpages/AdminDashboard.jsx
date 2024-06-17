@@ -12,26 +12,6 @@ const AdminDashboard = () => {
     const [internDetails, setInternDetails] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await fetch('/api/dashboard-data');
-    //             const data = await response.json();
-    //             setDashboardData({
-    //                 allMentor: data.allMentor,
-    //                 allIntern: data.allIntern
-    //             });
-    //             // Menyimpan detail data mentor dan intern
-    //             setMentorDetails(data.mentorDetails || []);
-    //             setInternDetails(data.internDetails || []);
-    //         } catch (error) {
-    //             console.error('Error fetching dashboard data:', error);
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, []);
-
     const handleBoxClick = (boxId) => {
         setActiveBox(boxId);
     };
@@ -44,41 +24,12 @@ const AdminDashboard = () => {
         navigate(`/edit-mentor/${mentorId}`);
     };
 
-    // const handleDeleteMentor = async (mentorId) => {
-    //     try {
-    //         const response = await fetch(`/api/delete-mentor/${mentorId}`, {
-    //             method: 'DELETE',
-    //         });
-    //         if (response.ok) {
-    //             setMentorDetails(mentorDetails.filter((mentor) => mentor.id !== mentorId));
-    //             alert('Mentor deleted successfully!');
-    //         } else {
-    //             alert('Failed to delete mentor.');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting mentor:', error);
-    //     }
-    // };
+
 
     const handleEditIntern = (internId) => {
         navigate(`/edit-intern/${internId}`);
     };
 
-    // const handleDeleteIntern = async (internId) => {
-    //     try {
-    //         const response = await fetch(`/api/delete-intern/${internId}`, {
-    //             method: 'DELETE',
-    //         });
-    //         if (response.ok) {
-    //             setInternDetails(internDetails.filter((intern) => intern.id !== internId));
-    //             alert('Intern deleted successfully!');
-    //         } else {
-    //             alert('Failed to delete intern.');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting intern:', error);
-    //     }
-    // };
 
     const boxStyle = (boxId) => (
         `flex items-center p-4 rounded-lg shadow-inner w-1/3 cursor-pointer ${activeBox === boxId ? 'bg-blue-200' : 'bg-gray-100'}`
