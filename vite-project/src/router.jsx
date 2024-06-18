@@ -25,7 +25,8 @@ import Attend from './adminpages/Attend.jsx';
 import { useStateContext } from './contexts/ContextProvider';
 import DetailSubmission from './adminpages/DetailSubmission.jsx';
 import DataLogbook from './adminpages/DataLogbook.jsx';
-
+import AdminProfile from './adminpages/AdminProfile.jsx';
+import EditAdminProfile from './adminpages/EditAdminProfile.jsx';
 
 const router = createBrowserRouter([
 
@@ -128,6 +129,14 @@ const router = createBrowserRouter([
             {
                 path: '/attend',
                 element: <Attend />
+            },
+            {
+                path: '/adminprofile',
+                element: <AdminProfile/>
+            },
+            {
+                path: '/editadminprofile',
+                element: <EditAdminProfile />
             },
             {
                 path: "*",
