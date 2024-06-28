@@ -11,7 +11,7 @@ const toggleNavbar =()=> {
 }
 const navigate = useNavigate();
   return (
-        <nav className="py-4 px-6 fixed top-0 w-full z-50 bg-white">
+        <nav className="py-4 px-6 relative top-0 w-full  bg-white">
             <div className="container px-4 mx-auto relative ">
                 <div className='flex justify-between items-center'>
                     <div className='flex flex-shrink-0 items-center'>
@@ -30,15 +30,15 @@ const navigate = useNavigate();
                             <span>login</span>
                         </button>
                     </div>
-                    <div className="lg:hidden md:flex flex-col justify-end">
+                    <div className="lg:hidden z-50 md:flex flex-col justify-end">
                       <button onClick={toggleNavbar}>
                         {mobileDrawerOpen? <HiOutlineX />: <HiMenu/>}
                       </button>
                     </div>
                 </div>
                 {mobileDrawerOpen && (
-                    <div className="fixed right-0 z-10 bg-gray-200 w-full p-10 flex flex-col justify-center items-center lg:hidden">
-                        <ul>
+                    <div className="fixed right-0 z-50 bg-gray-200 w-50 p-10 flex flex-col justify-center items-center lg:hidden">
+                        <ul className=''>
                             <li className='py-2 hover:text-orange-500' style={{ width: '200px' }}>
                                 <a href="/register">register</a>
                             </li>

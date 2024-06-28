@@ -5,6 +5,8 @@ import axiosClient from '../axios-client';
 
 function Attend() {
     const [attendanceData, setAttendanceData] = useState([]);
+    const [search, setSearch] = useState("");
+    console.log(search)
 
     useEffect(() => {
         fetchAttendance();
@@ -51,7 +53,8 @@ function Attend() {
             <h5 className="mx-5 text-xl text-left text-gray-500 font-bold tracking-wide">Daftar Kehadiran</h5>
             <div className='max-sm m-5 rounded-xl shadow-md mb-6 bg-white'>
                 <div className="pl-5 pt-5">
-                    <Searchbar />
+                    <Searchbar 
+                        onChange={(e)=> setSearch(e.target.value)}/>
                 </div>
 
                 <div className="overflow-x-auto bg-transparent m-4 p-4">
@@ -66,7 +69,10 @@ function Attend() {
                             </tr>
                         </thead>
                         <tbody>
-                            {attendanceData.map((data, index) => (
+                            {attendanceData.filter((data) => {
+                                return search.toLowerCase() === '' ? data : data.detail.toLowerCase().includes(search)
+                            })
+                            .map((data, index) => (
                                 <tr key={data.id} className='border capitalize text-gray-500 text-sm'>
                                     <td className="p-4 border text-center">{index + 1}</td>
                                     <td className="p-4 border">{data.user_profile.name}</td>

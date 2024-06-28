@@ -27,6 +27,8 @@ import DetailSubmission from './adminpages/DetailSubmission.jsx';
 import DataLogbook from './adminpages/DataLogbook.jsx';
 import AdminProfile from './adminpages/AdminProfile.jsx';
 import EditAdminProfile from './adminpages/EditAdminProfile.jsx';
+import About from './pages/About.jsx';
+import Requirements from './pages/requirements.jsx';
 
 const router = createBrowserRouter([
 
@@ -87,6 +89,18 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />
+            },
+            {
+                path: '/submission',
+                element: <Submission />
+            },
+            {
+                path: '/about',
+                element: <About />
+            },
+            {
+                path: '/requirements',
+                element: <Requirements />
             },
             {
                 path: '/submission',

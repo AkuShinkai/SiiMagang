@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axiosClient from '../axios-client';
-
+import { HiArrowLeft } from "react-icons/hi";
 function Submission() {
     const [members, setMembers] = useState([
         { id: 1, name: '', gender: '', email: '', phone: '' }
@@ -58,8 +58,12 @@ function Submission() {
 
     return (
         <div className='max-sm m-5 rounded-xl flex flex-col shadow-md mx-32 my-20'>
-            <div className="bg-[#FF9843] p-3 rounded-t-xl">
-                <span className="text-white tracking-wide uppercase font-bold mb-3">Apply Internship</span>
+            <div className="bg-[#FF9843] p-3 flex justify-between items-center gap-3 rounded-t-xl">
+                <button onClick={() => window.history.back()} className='ml-3 flex items-center'>
+                
+                <HiArrowLeft className='text-white'/>
+                </button>
+                <span className="text-white flex-grow  tracking-wide uppercase font-bold">Apply Internship</span>
             </div>
 
             {submissionStatus === 'success' && (

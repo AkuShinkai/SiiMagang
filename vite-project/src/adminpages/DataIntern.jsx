@@ -23,6 +23,8 @@ function DataIntern() {
     const [activeTab, setActiveTab] = useState(TABS[0].value);
     const img = useRef();
     const [image, setImage] = useState(null);
+    const [search, setSearch] = useState("");
+    console.log(search)
 
     useEffect(() => {
         // Fetch data when component mounts
@@ -69,7 +71,7 @@ function DataIntern() {
                         </button>
                         ))}
                     </div>
-                    <Searchbar/>
+                    <Searchbar onChange={(e)=> setSearch(e.target.value)}/>
                 </div>
                 <div className=" overflow-x-auto bg-transparent m-4 p-4">
                     <table className='w-full text-left'>
@@ -87,7 +89,10 @@ function DataIntern() {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredData.map(({ profile_picture, name, institution, position, start_date, end_date }, index) => {
+                            {filteredData.filter((data) => {
+                                return search.toLowerCase() === '' ? data : data.name.toLowerCase().includes(search)
+                            })
+                            .map(({ profile_picture, name, institution, position, start_date, end_date }, index) => {
                                 const status = getStatus(start_date, end_date);
                                 return (
                                     <tr key={index + 1} className='border-t text-gray-500 text-sm'>
