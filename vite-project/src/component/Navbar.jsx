@@ -11,12 +11,12 @@ const toggleNavbar =()=> {
 }
 const navigate = useNavigate();
   return (
-        <nav className="py-4 px-6 relative top-0 w-full  bg-white">
+        <nav className="py-4 px-6 z-50 top-0 w-full fixed bg-white">
             <div className="container px-4 mx-auto relative ">
                 <div className='flex justify-between items-center'>
                     <div className='flex flex-shrink-0 items-center'>
                         <img src={logo} alt="logo" className="h-10 w-10 mr-2" />
-                        <span className="text-2xl font-bold leading-tight text-gray-600 tracking-tight">SiMagang</span>
+                        <a href='/welcome' className="text-2xl font-bold leading-tight text-gray-600 tracking-tight">SiMagang</a>
                     </div>
                     <div className='hidden lg:flex justify-center space-x-5 items-center'>
                         <button
@@ -37,7 +37,7 @@ const navigate = useNavigate();
                     </div>
                 </div>
                 {mobileDrawerOpen && (
-                    <div className="fixed right-0 z-50 bg-gray-200 w-50 p-10 flex flex-col justify-center items-center lg:hidden">
+                    <div className="fixed right-0 z-50 w-full bg-gray-200 w-50 p-10 flex flex-col justify-center items-center lg:hidden">
                         <ul className=''>
                             <li className='py-2 hover:text-orange-500' style={{ width: '200px' }}>
                                 <a href="/register">register</a>

@@ -29,6 +29,7 @@ import AdminProfile from './adminpages/AdminProfile.jsx';
 import EditAdminProfile from './adminpages/EditAdminProfile.jsx';
 import About from './pages/About.jsx';
 import Requirements from './pages/requirements.jsx';
+import SubmissionsApp from './SubmissionsApp.jsx';
 
 const router = createBrowserRouter([
 
@@ -91,10 +92,6 @@ const router = createBrowserRouter([
                 element: <Register />
             },
             {
-                path: '/submission',
-                element: <Submission />
-            },
-            {
                 path: '/about',
                 element: <About />
             },
@@ -102,6 +99,16 @@ const router = createBrowserRouter([
                 path: '/requirements',
                 element: <Requirements />
             },
+            {
+                path: "*",
+                element: <NotFound />
+            }
+        ]
+    },
+    {
+        path: '/',
+        element: <SubmissionsApp />,
+        children: [
             {
                 path: '/submission',
                 element: <Submission />

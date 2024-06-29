@@ -10,7 +10,7 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // console.log("App - roles:", roles);
+        if (roles === undefined || roles === null) return;
         if (roles === 'mentor') {
             navigate('/admin');
         }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiOutlineUser, HiOutlineLogout, HiMenu,HiX } from 'react-icons/hi'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import classNames from 'classnames'
@@ -7,13 +7,14 @@ import Logout from '../pages/Logout'
 import { Link, useLocation, useNavigate  } from 'react-router-dom';
 import logo from '../assets/SiMagang.png'
 import { ADMIN_SIDEBAR_LINKS, ADMIN_SIDEBAR_BOTTOM_LINKS } from '../lib/constants'
+import axiosClient from '../axios-client'
 
 
 
 const linkClass = 'flex items-center gap-2 font-light px-3 py-2 hover:bg-[#FF9843] hover:no-underline hover:text-white active:text-white active:bg-[#FF9843] rounded-full text-base';
 const Header = ({ toggleSidebar }) => {
     const [ sidebarOpen, setSidebarOpen] = useState(false);
-    
+
     const handleToggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
       };
@@ -25,26 +26,27 @@ const Header = ({ toggleSidebar }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
 
-    // const [profileData, setProfileData] = useState({
-    //     profile_picture: "",
-    // });
+    const [profileData, setProfileData] = useState({
+        profile_picture: "",
+        name:""
+    });
 
-    // const profileImageUrl = profileData.profile_picture ? profileData.profile_picture : placeholderImageUrl;
+    const profileImageUrl = profileData.profile_picture ? profileData.profile_picture : placeholderImageUrl;
 
-    // useEffect(() => {
-    //     // Ambil data profil pengguna saat komponen dimuat
-    //     fetchProfileData();
-    // }, []);
+    useEffect(() => {
+        // Ambil data profil pengguna saat komponen dimuat
+        fetchProfileData();
+    }, []);
 
-    // const fetchProfileData = async () => {
-    //     try {
-    //         const response = await axiosClient.get("/");
-    //         const data = response.data;
-    //         setProfileData(data);
-    //     } catch (error) {
-    //         console.error("Error fetching profile data:", error);
-    //     }
-    // };
+    const fetchProfileData = async () => {
+        try {
+            const response = await axiosClient.get("/profile");
+            const data = response.data;
+            setProfileData(data);
+        } catch (error) {
+            console.error("Error fetching profile data:", error);
+        }
+    };
 
     return (
         <div className='w-full'>
@@ -54,7 +56,7 @@ const Header = ({ toggleSidebar }) => {
                 </button>
                 <div className="flex items-center gap-2 mr-2 md:mr-0">
                     <Popover className="relative">
-                        <p>Admin</p>
+                        <p>{profileData.name ? profileData.name : "Admin"}</p>
                     </Popover>
 
                     <Menu as="div" className="relative">
@@ -62,8 +64,8 @@ const Header = ({ toggleSidebar }) => {
                             <Menu.Button className="ml-2 bg-transparent flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
                                 <span className="sr-only">Open user menu</span>
                                 <div
-                                    className="h-10 w-10 rounded-full bg-transparent bg-cover bg-no-repeat bg-center"
-                                    // style={{ backgroundImage: `url("${profileImageUrl}")` }}
+                                    className="h-10 w-10 rounded-full ring-orange-300 ring bg-transparent bg-cover bg-no-repeat bg-center"
+                                    style={{ backgroundImage: `url("${profileImageUrl}")` }}
                                 >
                                     <span className="sr-only">Marc Backes</span>
                                 </div>
@@ -111,7 +113,7 @@ const Header = ({ toggleSidebar }) => {
                 </div>
             </div>
 
-            {sidebarOpen && 
+            {sidebarOpen &&
             <div className="md:hidden  ">
             <div className="fixed inset-0 bg-gray-500 opacity-25"  ></div>
                 <nav className="bg-gray-400 fixed top-0 left-0 bottom-0 flex flex-col w-3/6 max-w-sm py-6 px-6 border-r overflow-y-auto">
@@ -144,13 +146,13 @@ const Header = ({ toggleSidebar }) => {
                         </button>
                         {showModal && <Logout setOpen={setShowModal} />}
                     </div>
-                    
+
                 </nav>
-                
+
             </div>
 
             }
-        
+
         </div>
     )
 }

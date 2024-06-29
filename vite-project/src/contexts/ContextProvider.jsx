@@ -1,21 +1,29 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const StateContext = createContext({
     user: null,
     token: null,
     roles: null,
-    setUser: () => { },
-    setToken: () => { },
-    setRoles: () => { },
+    setUser: () => {},
+    setToken: () => {},
+    setRoles: () => {},
 });
 
 export const ContextProvider = ({ children }) => {
     const [user, setUser] = useState({
         name: 'User',
-        email: ''
+        email: '',
+        roles: ''
     });
     const [token, _setToken] = useState(localStorage.getItem('ACCESS_TOKEN'));
     const [roles, setRoles] = useState(localStorage.getItem('USER_ROLES'));
+
+    useEffect(() => {
+        const savedRoles = localStorage.getItem('USER_ROLES');
+        if (savedRoles) {
+            setRoles(savedRoles);
+        }
+    }, []);
 
     const setToken = (token) => {
         _setToken(token);

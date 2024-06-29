@@ -21,7 +21,7 @@ class ProfileController extends Controller
         // Menambahkan email ke dalam data profil
         $profile->email = $email;
 
-        // Ambil submission berdasarkan email pengguna
+        // Ambil submission berdasarkan email pengguna di submission_members
         $submission = Submission::whereHas('submissionMembers', function ($query) use ($email) {
             $query->where('email', $email);
         })->first();

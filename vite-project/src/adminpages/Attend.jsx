@@ -53,7 +53,7 @@ function Attend() {
             <h5 className="mx-5 text-xl text-left text-gray-500 font-bold tracking-wide">Daftar Kehadiran</h5>
             <div className='max-sm m-5 rounded-xl shadow-md mb-6 bg-white'>
                 <div className="pl-5 pt-5">
-                    <Searchbar 
+                    <Searchbar
                         onChange={(e)=> setSearch(e.target.value)}/>
                 </div>
 

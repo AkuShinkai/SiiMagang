@@ -57,10 +57,15 @@ function Submission() {
 
 
     return (
-        <div className='max-sm m-5 rounded-xl flex flex-col shadow-md mx-32 my-20'>
-            <div className="bg-[#FF9843] p-3 flex justify-between items-center gap-3 rounded-t-xl">
-                <button onClick={() => window.history.back()} className='ml-3 flex items-center'>
-                
+        <div className='w-auto m-5 mt-28 rounded-xl flex flex-col shadow-md mx-32 my-20'>
+            <div className="absolute md:top-50 left-24 lg:left-12 w-96 h-96 md:w-48 md:h-48 bg-orange-500 rounded-full md:mix-blend-multiply mix-blend-hue filter blur-xl opacity-70 animate-blob"></div>
+            <div className="absolute -top-24 md:top-0 md:-right-4 -right-10 w-72 h-72 md:w-72 md:h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute md:hidden top-60 md:top-0 left-10 w-24 h-24 md:w-72 md:h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute md:hidden bottom-60 md:top-0 right-10 w-24 h-24 md:w-72 md:h-72 bg-orange-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-8 md:-bottom-32 -left-32 lg:left-96 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+            <div className="bg-[#FF9843] p-3 flex justify-between items-center gap-3 rounded-t-xl z-40">
+                <button onClick={() => window.history.back()} className='ml-3 flex z-50 items-center'>
+
                 <HiArrowLeft className='text-white'/>
                 </button>
                 <span className="text-white flex-grow  tracking-wide uppercase font-bold">Apply Internship</span>
@@ -79,7 +84,7 @@ function Submission() {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit} className="px-5 py-5 bg-white">
+            <form onSubmit={handleSubmit} className="px-5 py-5 bg-white z-40">
                 <div className='md:flex mb-4'>
                     <div className='md:w-1/4 text-left text-gray-800 tracking-wide uppercase font-bold '>Group Members</div>
                     <div className='md:w-3/4'>

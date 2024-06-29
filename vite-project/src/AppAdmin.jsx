@@ -10,14 +10,13 @@ function AppAdmin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // console.log("AppAdmin - roles:", roles);
+        if (roles === undefined || roles === null) return;
         if (roles !== 'mentor') {
             navigate('/');
         }
     }, [roles, navigate]);
 
     if (!token) {
-        // console.log("No token found, redirecting to /welcome");
         return <Navigate to="/welcome" />;
     }
 

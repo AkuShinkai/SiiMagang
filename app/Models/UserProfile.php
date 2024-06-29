@@ -40,4 +40,16 @@ class UserProfile extends Model
             'submissions_id'
         );
     }
+
+    public function submissionMembers()
+    {
+        return $this->hasManyThrough(
+            SubmissionMember::class,
+            User::class,
+            'id', // Foreign key on the User table...
+            'email', // Foreign key on the SubmissionMember table...
+            'users_id', // Local key on the UserProfile table...
+            'email' // Local key on the User table...
+        );
+    }
 }

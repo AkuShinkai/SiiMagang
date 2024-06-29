@@ -5,20 +5,19 @@ import About from "./pages/About";
 import Requirements from "./pages/requirements";
 
 
-function LandingPage() {
+function SubmissionsApp() {
     const { token } = useStateContext()
     if (token) {
         return <Navigate to="/" />
     }
 
     return (
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-hidden w-screen">
             <Navbar/>
             <Outlet />
-            <About/>
             <Requirements/>
         </div>
     )
 }
 
-export default LandingPage;
+export default SubmissionsApp;
