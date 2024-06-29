@@ -5,7 +5,7 @@ import About from "./pages/About";
 import Requirements from "./pages/requirements";
 
 
-function SubmissionsApp() {
+function AuthApp() {
     const { token } = useStateContext()
     if (token) {
         return <Navigate to="/" />
@@ -15,9 +15,8 @@ function SubmissionsApp() {
         <div className="overflow-x-hidden">
             <Navbar/>
             <Outlet />
-            <Requirements/>
         </div>
     )
 }
 
-export default SubmissionsApp;
+export default AuthApp;

@@ -29,7 +29,7 @@ import AdminProfile from './adminpages/AdminProfile.jsx';
 import EditAdminProfile from './adminpages/EditAdminProfile.jsx';
 import About from './pages/About.jsx';
 import Requirements from './pages/requirements.jsx';
-import SubmissionsApp from './SubmissionsApp.jsx';
+import AuthApp from './AuthApp.jsx';
 
 const router = createBrowserRouter([
 
@@ -83,14 +83,7 @@ const router = createBrowserRouter([
                 path: '/welcome',
                 element: <Welcome />
             },
-            {
-                path: '/login',
-                element: <Login />
-            },
-            {
-                path: '/register',
-                element: <Register />
-            },
+
             {
                 path: '/about',
                 element: <About />
@@ -107,11 +100,19 @@ const router = createBrowserRouter([
     },
     {
         path: '/',
-        element: <SubmissionsApp />,
+        element: <AuthApp />,
         children: [
             {
                 path: '/submission',
                 element: <Submission />
+            },
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/register',
+                element: <Register />
             },
             {
                 path: "*",
