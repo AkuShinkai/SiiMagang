@@ -12,7 +12,7 @@ function SubmissionsApp() {
     }
 
     return (
-        <div className="overflow-x-hidden w-screen">
+        <div className="overflow-x-hidden">
             <Navbar/>
             <Outlet />
             <Requirements/>
