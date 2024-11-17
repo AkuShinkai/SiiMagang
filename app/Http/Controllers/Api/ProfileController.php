@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
 use App\Models\Submission;
@@ -14,14 +12,11 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $profile = UserProfile::where('users_id', $user->id)->first();
-
         // Mendapatkan email dari user menggunakan Auth::user()
         $email = Auth::user()->email;
-
         // Menambahkan email ke dalam data profil
         $profile->email = $email;
-
-        // Ambil submission berdasarkan email pengguna di submission_members
+        // Mengambil submission berdasarkan email pengguna di submission_members
         $submission = Submission::whereHas('submissionMembers', function ($query) use ($email) {
             $query->where('email', $email);
         })->first();
@@ -34,7 +29,6 @@ class ProfileController extends Controller
                 'semester' => $submission->semester,
             ];
         }
-
         return response()->json($profile);
     }
 

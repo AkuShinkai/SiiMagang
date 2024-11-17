@@ -70,7 +70,7 @@ function Attend() {
                         </thead>
                         <tbody>
                             {attendanceData.filter((data) => {
-                                return search.toLowerCase() === '' ? data : data.detail.toLowerCase().includes(search)
+                                return search.toLowerCase() === '' ? data : data.user_profile.name.toLowerCase().includes(search)
                             })
                             .map((data, index) => (
                                 <tr key={data.id} className='border capitalize text-gray-500 text-sm'>

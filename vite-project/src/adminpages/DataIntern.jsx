@@ -101,7 +101,7 @@ function DataIntern() {
                                             <img
                                                 src={image ? image : profile_picture}
                                                 alt={profile_picture}
-                                                className="h-10 w-10 rounded-full bg-transparent bg-cover"/>
+                                                className="h-10 w-10 rounded-full bg-transparent bg-cover ring-orange-300 ring"/>
                                         </td>
                                         <td className='p-4'>{name}</td>
                                         <td className='p-4'>{institution}</td>

@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Logbook;
@@ -41,7 +39,6 @@ class LogbookController extends Controller
         $logbook->date = $request->date;
         $logbook->activity = $request->activity;
         $logbook->user_profiles_id = $profile->id;
-
         $logbook->save();
 
         return response()->json($logbook);

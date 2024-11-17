@@ -10,7 +10,12 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'start_date', 'end_date', 'repository', 'submissions_id'
+        'name',
+        'description',
+        'start_date',
+        'end_date',
+        'repository',
+        'submissions_id'
     ];
 
     public function submission()

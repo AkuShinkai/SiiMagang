@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,13 +39,10 @@ class User extends Authenticatable
                 // Jika SubmissionMember ditemukan, gunakan namanya untuk membuat profil pengguna
                 if ($submissionMember) {
                     $userProfile = new UserProfile();
-
                     // Atur nama profil dengan nama dari SubmissionMember
                     $userProfile->name = $submissionMember->name;
-
-                    // Hubungkan profil pengguna dengan pengguna yang baru didaftarkan
+                    // Menghubungkan profil pengguna dengan pengguna yang baru didaftarkan
                     $userProfile->users_id = $user->id;
-
                     // Simpan profil pengguna
                     $userProfile->save();
                 }

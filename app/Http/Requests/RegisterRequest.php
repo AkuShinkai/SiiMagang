@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 use App\Models\SubmissionMember;
@@ -33,7 +31,8 @@ class RegisterRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     $submissionMember = SubmissionMember::where('email', $value)->first();
                     if (!$submissionMember || $submissionMember->status !== 'accepted') {
-                        $fail('The email address is not authorized for registration. Please make an application request first before making an account');
+                        $fail('The email address is not authorized for registration.
+                        Please make an submissions request first before making an account');
                     } else {
                         $this->submissionMemberName = $submissionMember->name; // Simpan nama anggota
                     }

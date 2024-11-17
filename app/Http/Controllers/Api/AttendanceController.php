@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
@@ -70,8 +68,6 @@ class AttendanceController extends Controller
         if (!$submissionMember) {
             return response()->json(['message' => 'Submission member not found'], 404);
         }
-
-        // Ambil data submission terkait
         $submission = $submissionMember->submission;
 
         // Ambil data kehadiran berdasarkan user_profiles_id
@@ -79,7 +75,6 @@ class AttendanceController extends Controller
             ->with('userProfile')
             ->get();
 
-        // Buat response data
         $attendanceList = $attendances->map(function ($attendance) use ($submission) {
             return [
                 'id' => $attendance->id,
@@ -94,7 +89,6 @@ class AttendanceController extends Controller
                 'status' => $attendance->status,
             ];
         });
-
         return response()->json($attendanceList);
     }
 

@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
-use App\Models\Submission;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\SubmissionMember;

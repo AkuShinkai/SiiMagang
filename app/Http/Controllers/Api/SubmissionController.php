@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmissionRequest;
 use Illuminate\Http\Request;
@@ -68,6 +66,17 @@ class SubmissionController extends Controller
         return response()->json($submission);
     }
 
+    public function getMembers($id)
+    {
+        // Mengambil submission berdasarkan ID
+        $submission = Submission::findOrFail($id);
+
+        // Mengambil daftar member dari submission
+        $members = $submission->submissionMembers;
+
+        // Mengembalikan daftar member sebagai respons JSON
+        return response()->json(['members' => $members], 200);
+    }
 
     public function destroy($id)
     {
@@ -100,20 +109,6 @@ class SubmissionController extends Controller
 
         return response()->json(['message' => 'Submission member created successfully'], 201);
     }
-
-    // Metode untuk mendapatkan daftar member submission
-    public function getMembers($id)
-    {
-        // Mengambil submission berdasarkan ID
-        $submission = Submission::findOrFail($id);
-
-        // Mengambil daftar member dari submission
-        $members = $submission->submissionMembers;
-
-        // Mengembalikan daftar member sebagai respons JSON
-        return response()->json(['members' => $members], 200);
-    }
-
 
     public function updateMember(Request $request, $id)
     {
